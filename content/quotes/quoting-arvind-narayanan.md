@@ -1,14 +1,14 @@
 ---
 title: "Quoting Arvind Narayanan"
-date: 2025-05-05
+date: 2025-06-19
 slug: "quoting-arvind-narayanan"
-ref: https://simonwillison.net/2025/May/5/arvind-narayanan/#atom-everything
+tags:
+  - quote
+ref: https://simonwillison.net/2025/Jun/19/arvind-narayanan/#atom-everything
 ---
 
-Quoting [Simon Willison's Weblog](https://simonwillison.net/2025/May/5/arvind-narayanan/#atom-everything):
+Quoting [Simon Willison&#39;s Weblog](https://simonwillison.net/2025/Jun/19/arvind-narayanan/#atom-everything):
 
-> AI is helpful despite being error-prone if it is faster to verify the output than it is to do the work yourself. For example, if you're using it to find a product that matches a given set of specifications, verification may be a lot faster than search.
+> Radiology has embraced AI enthusiastically, and the labor force is growing nevertheless. The augmentation-not-automation effect of AI is despite the fact that AFAICT there is no identified &#34;task&#34; at which human radiologists beat AI. So maybe the &#34;jobs are bundles of tasks&#34; model in labor economics is incomplete.
 
-> There are many uses where errors don't matter, like using it to enhance creativity by suggesting or critiquing ideas.
-
-> At a meta level, if you use AI without a plan and simply turn to AI tools when you feel like it, then you're unlikely to be able to think through risks and mitigations. It is better to identify concrete ways to integrate AI into your workflows, with known benefits and risks, that you can employ repeatedly.
+> when we think about *other people&#39;s jobs* that we don&#39;t understand as well as our own, the task model seems plausible because we don&#39;t appreciate all the nuances.
