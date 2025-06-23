@@ -3,6 +3,7 @@ title: "Windsurf CEO: Betting on AI Agents, Pivoting in 48 Hours, and the Future
 date: 2025-05-13
 slug: "windsurf-ceo-betting-on-ai-agents-pivoting-in-48-hours-and-the-future-of-coding"
 ref: https://share.snipd.com/episode/49582313-880f-4bf9-877a-0803635eb5bd
+draft: true
 ---
 
 Quoting [Lightcone Podcast](https://share.snipd.com/episode/49582313-880f-4bf9-877a-0803635eb5bd):
