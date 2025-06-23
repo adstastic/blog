@@ -141,3 +141,7 @@ The `fetch_and_generate_quotes.py` script:
 - Use `ag` instead of `rg` for code searching (rg is not installed)
 - Log using Python's `logging` module, not print statements
 - Minimize cognitive load - write readable, self-documenting code
+
+## Claude Memories
+
+- Don't automate reading and analysing content. Inspect it yourself.

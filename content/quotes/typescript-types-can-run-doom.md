@@ -3,6 +3,7 @@ title: "TypeScript Types Can Run DOOM"
 date: 2025-02-27
 slug: "typescript-types-can-run-doom"
 ref: https://simonwillison.net/2025/Feb/27/typescript-types-can-run-doom/#atom-everything
+draft: true
 ---
 
 Quoting [Simon Willison](https://simonwillison.net/2025/Feb/27/typescript-types-can-run-doom/#atom-everything):
