@@ -145,3 +145,34 @@ The `fetch_and_generate_quotes.py` script:
 ## Claude Memories
 
 - Don't automate reading and analysing content. Inspect it yourself.
+
+## Writing Guidelines for Blog Content
+
+### Writing Anti-Patterns to Avoid
+- **Empty summary sentences**: Don't end paragraphs with vague statements like "this improves performance" - conclude with substantive insights
+- **Vague language**: Replace general terms with specific, concrete details
+- **Overuse of demonstrative pronouns**: Minimize "this", "that", "these" - be explicit about what you're referencing
+- **Low information density**: Every sentence should advance the narrative or provide new information
+- **Monotonous rhythm**: Avoid using the same sentence length repeatedly
+
+### Effective Writing Techniques
+- **Sentence variety**: Mix short, punchy sentences with longer, more complex ones for better flow
+- **Subject-verb proximity**: Keep subjects and verbs close together for clarity
+- **Front-load main ideas**: Put the most important information early in sentences
+- **Concrete language**: Use specific examples and precise terminology
+- **Parallel structure**: Organize related ideas using consistent grammatical patterns
+- **Em dashes for clarity**: Use em dashes (—) to add clarifying details or emphasize points
+
+### Content Development Process
+1. **Outline the narrative**: Start by mapping out the story structure and key points
+2. **Draft freely**: Write initial drafts focusing on ideas, not perfection
+3. **Targeted revision**: Apply specific rewrite strategies during editing
+4. **SWBST framework**: For narrative pieces, consider: Somebody Wanted But So Then
+
+### Revision Checklist
+- [ ] Does each sentence serve a clear purpose?
+- [ ] Is the information density high throughout?
+- [ ] Are technical concepts explained thoroughly?
+- [ ] Do paragraph endings provide substantive insights?
+- [ ] Is the subject matter directly related to the main idea?
+- [ ] Have you minimized filler words and empty phrases?
