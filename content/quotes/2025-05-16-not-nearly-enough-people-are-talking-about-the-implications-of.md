@@ -1,10 +1,10 @@
 ---
-title: "Not Nearly Enough People Are Talking About the Implications Of..."
 date: 2025-05-16
 slug: "not-nearly-enough-people-are-talking-about-the-implications-of"
+title: "Not Nearly Enough People Are Talking About the Implications Of Klarna rolling back some of their AI bets."
+ref: https://x.com/chamath/status/1922096736308490416/
 tags:
   - quote
-ref: https://readwise.io/bookreview/51452486
 ---
 
 Quoting [Chamath Palihapitiya](https://readwise.io/bookreview/51452486):
