@@ -145,6 +145,8 @@ The `fetch_and_generate_quotes.py` script:
 ## Claude Memories
 
 - Don't automate reading and analysing content. Inspect it yourself.
+- Video shortcode: Use `{{< video src="/path/to/video.mp4" >}}` to embed videos
+- Escaping shortcodes: To display shortcode syntax as text in posts, use `{{</* shortcode-name */>}}` or `{{%/* shortcode-name */%}}`
 
 ## Writing Guidelines for Blog Content
 
