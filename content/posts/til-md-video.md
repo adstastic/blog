@@ -1,5 +1,5 @@
 ---
-title: "TIL: Chromium & Webkit treat markdown videos differently"
+title: "TIL: Webkit supports videos in <img> tags"
 date: 2025-07-10T16:26:07+09:00
 draft: false
 tags: []
