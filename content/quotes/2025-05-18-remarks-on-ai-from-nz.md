@@ -3,7 +3,6 @@ date: 2025-05-18
 slug: "remarks-on-ai-from-nz"
 title: "Remarks on AI From NZ"
 date: 2025-05-18
-slug: "remarks-on-ai-from-nz"
 tags:
   - quote
   - re-read
@@ -13,7 +12,6 @@ tags:
   - ai
 ref: https://nealstephenson.substack.com/p/remarks-on-ai-from-nz
 ---
-
 Quoting [Neal Stephenson](https://nealstephenson.substack.com/p/remarks-on-ai-from-nz):
 
 ## How humans can coexist with other intelligences

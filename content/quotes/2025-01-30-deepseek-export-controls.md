@@ -3,12 +3,10 @@ date: 2025-01-30
 slug: "deepseek-export-controls"
 title: "On DeepSeek and Export Controls"
 date: 2025-01-30
-slug: "deepseek-export-controls"
 tags:
   - quote
 ref: https://darioamodei.com/on-deepseek-and-export-controls
 ---
-
 Quoting [Dario Amodei](https://darioamodei.com/on-deepseek-and-export-controls):
 
 > People are naturally attracted to the idea that "first something is expensive, then it gets cheaper" — as if AI is a single thing of constant quality, and when it gets cheaper, we'll use fewer chips to train it. But what's important is the scaling curve: when it shifts, we simply traverse it faster, because the value of what's at the end of the curve is so high.

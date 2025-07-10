@@ -1,13 +1,12 @@
 ---
 date: 2025-05-16
-slug: "not-nearly-enough-people-are-talking-about-the-implications-of"
-title: "Not Nearly Enough People Are Talking About the Implications Of Klarna rolling back some of their AI bets."
+tags:
+  - quote
 ref: https://x.com/chamath/status/1922096736308490416/
 tags:
   - quote
 ---
-
-Quoting [Chamath Palihapitiya](https://readwise.io/bookreview/51452486):
+Quoting [Chamath Palihapitiya](https://x.com/chamath/status/1922096736308490416/):
 
 > Replacing determinism or humans with probabilistic code is fraught with edge cases and require new ways of software development and process engineering that aren&#39;t well solved yet.
 The implications to an entire generation of AI &#34;apps&#34; will be severe as more companies come to terms with the difficulty in getting products to work reliably in production with AI in the loop. Customer Service may be the first funeral signpost.
