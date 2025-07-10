@@ -41,7 +41,7 @@ When installing via the CLI, add `-s user` to populate the same part of the conf
 
 There are a lot of recommendations for the context7 MCP server, but I find [Ref](https://ref.tools/) faster, more reliable, and token-efficient. There's a generous free tier[^generous], so it's worth a try. Here's a side-by-side comparison on finding docs for Apple's Foundation Models framework:
 
-![screen recording comparing ref and context7 searching for iOS Foundation Models Framework documentation](/assets/ref-vs-context7-web-h264.mp4)
+{{< video src="/assets/ref-vs-context7-web-h264.mp4" >}}
 
 [^generous]: Ref claims the 200 free tier credits last 10 weeks of typical usage.
 
@@ -51,7 +51,7 @@ I still use my [custom mobile dev setup](/p/remote-control-claude-code/), but [V
 
 [^backpack]: Just not when it's in clamshell mode in your backpack.
 
-![screen recording of using Vibe Tunnel to manage multiple Claude Code sessions](/assets/vibe-tunnel.mp4)
+{{< video src="/assets/vibe-tunnel.mp4" >}}
 
 ## Optimisation
 
