@@ -1,7 +1,6 @@
 ---
 date: 2025-01-20
-tags:
-  - quote
+slug: "great-work"
 ref: http://paulgraham.com/greatwork.html
 ---
 Quoting [Paul Graham](http://paulgraham.com/greatwork.html):

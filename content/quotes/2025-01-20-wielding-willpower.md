@@ -1,7 +1,6 @@
 ---
 date: 2025-01-20
-tags:
-  - quote
+slug: "wielding-willpower"
 ref: https://patrickdfarley.com/wielding-willpower/
 ---
 Quoting [on May 17](https://patrickdfarley.com/wielding-willpower/):

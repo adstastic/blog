@@ -1,7 +1,6 @@
 ---
 date: 2025-01-19
-tags:
-  - quote
+slug: "too-smart-stupid"
 ref: https://medium.com/@theo.seeds/why-being-too-smart-makes-you-stupid-46a02e777512
 ---
 Quoting [Theo Seeds](https://medium.com/@theo.seeds/why-being-too-smart-makes-you-stupid-46a02e777512):

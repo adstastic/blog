@@ -1,7 +1,6 @@
 ---
 date: 2025-01-11
-tags:
-  - quote
+slug: "quit-your-job"
 ref: https://www.palladiummag.com/2022/01/06/quit-your-job/
 ---
 Quoting [Wolf Tivy](https://www.palladiummag.com/2022/01/06/quit-your-job/):

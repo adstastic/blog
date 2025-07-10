@@ -1,7 +1,6 @@
 ---
 date: 2025-01-19
-tags:
-  - quote
+slug: "schlep-blindness"
 ref: https://paulgraham.com/schlep.html
 ---
 Quoting [Paul Graham](https://paulgraham.com/schlep.html):

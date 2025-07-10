@@ -1,7 +1,6 @@
 ---
 date: 2025-01-16
-tags:
-  - quote
+slug: "learning-hardware"
 ref: https://caseyhandmer.wordpress.com/2024/06/08/how-to-learn-hardware/
 ---
 Quoting [Casey Handmer's blog](https://caseyhandmer.wordpress.com/2024/06/08/how-to-learn-hardware/):

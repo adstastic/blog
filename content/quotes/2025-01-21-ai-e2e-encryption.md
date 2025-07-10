@@ -1,7 +1,6 @@
 ---
 date: 2025-01-21
-tags:
-  - quote
+slug: "ai-e2e-encryption"
 ref: https://blog.cryptographyengineering.com/2025/01/17/lets-talk-about-ai-and-end-to-end-encryption
 ---
 Quoting [Matthew Green](https://blog.cryptographyengineering.com/2025/01/17/lets-talk-about-ai-and-end-to-end-encryption):

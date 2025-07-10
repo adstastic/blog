@@ -1,7 +1,6 @@
 ---
 date: 2025-01-09
-tags:
-  - quote
+slug: "searching-for-outliers"
 ref: https://www.benkuhn.net/outliers/
 ---
 Quoting [benkuhn.net](https://www.benkuhn.net/outliers/):

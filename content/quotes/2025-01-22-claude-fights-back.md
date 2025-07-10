@@ -1,7 +1,6 @@
 ---
 date: 2025-01-22
-tags:
-  - quote
+slug: "claude-fights-back"
 ref: https://www.astralcodexten.com/p/claude-fights-back
 ---
 Quoting [Scott Alexander](https://www.astralcodexten.com/p/claude-fights-back):

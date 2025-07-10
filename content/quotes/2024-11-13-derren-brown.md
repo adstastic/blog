@@ -1,7 +1,6 @@
 ---
 date: 2024-11-13
-tags:
-  - quote
+slug: "derren-brown"
 ref: https://tim.blog/2024/11/10/derren-brown-transcript/
 ---
 Quoting Derren Brown on [Tim Ferriss #776](https://tim.blog/2024/11/10/derren-brown-transcript/).

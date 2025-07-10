@@ -1,7 +1,6 @@
 ---
 date: 2025-01-19
-tags:
-  - quote
+slug: "startup-ideas"
 ref: https://paulgraham.com/startupideas.html
 ---
 Quoting [Paul Graham](https://paulgraham.com/startupideas.html):

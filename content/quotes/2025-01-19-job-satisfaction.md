@@ -1,7 +1,6 @@
 ---
 date: 2025-01-19
-tags:
-  - quote
+slug: "job-satisfaction"
 ref: https://80000hours.org/career-guide/job-satisfaction/
 ---
 Quoting [Benjamin Todd](https://80000hours.org/career-guide/job-satisfaction/):

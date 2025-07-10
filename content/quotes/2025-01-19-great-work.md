@@ -1,7 +1,6 @@
 ---
 date: 2025-01-19
-tags:
-  - quote
+slug: "great-work"
 ref: http://paulgraham.com/greatwork.html
 slug: paul-graham
 tags: quote

@@ -1,7 +1,6 @@
 ---
 date: 2025-01-13
-tags:
-  - quote
+slug: "work-inertia-procrastination"
 ref: https://www.lesswrong.com/posts/9o3QBg2xJXcRCxGjS/working-hurts-less-than-procrastinating-we-fear-the-twinge
 ---
 Quoting [Eliezer Yudkowsky](https://www.lesswrong.com/posts/9o3QBg2xJXcRCxGjS/working-hurts-less-than-procrastinating-we-fear-the-twinge):

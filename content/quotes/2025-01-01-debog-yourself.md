@@ -1,7 +1,6 @@
 ---
 date: 2025-01-01
-tags:
-  - quote
+slug: "debog-yourself"
 ref: https://www.experimental-history.com/p/so-you-wanna-de-bog-yourself
 ---
 Quoting [Adam Mastroianni](https://www.experimental-history.com/p/so-you-wanna-de-bog-yourself):

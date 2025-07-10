@@ -1,7 +1,6 @@
 ---
 date: 2025-01-01
-tags:
-  - quote
+slug: "passion-projects"
 ref: https://www.youtube.com/watch?v=W3I3kAg2J7w
 ---
 Quoting [John Collison](https://twitter.com/collision/status/1529452415346302976):

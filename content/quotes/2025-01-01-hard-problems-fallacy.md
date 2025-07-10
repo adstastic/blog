@@ -1,7 +1,6 @@
 ---
 date: 2025-01-01
-tags:
-  - quote
+slug: "hard-problems-fallacy"
 ref: https://www.benkuhn.net/hard/
 ---
 Quoting [benkuhn.net](https://www.benkuhn.net/hard/):

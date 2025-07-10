@@ -1,7 +1,6 @@
 ---
 date: 2025-01-20
-tags:
-  - quote
+slug: "cant-hoard-life"
 ref: https://ckarchive.com/b/68ueh8hkxrx6lukq88gqmtz7vxkkk
 ---
 Quoting [ckarchive.com](https://ckarchive.com/b/68ueh8hkxrx6lukq88gqmtz7vxkkk):

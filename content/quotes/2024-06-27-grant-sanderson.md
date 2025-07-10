@@ -1,7 +1,6 @@
 ---
 date: 2024-06-27
-tags:
-  - quote
+slug: "grant-sanderson"
 ref: https://www.youtube.com/watch?v=W3I3kAg2J7w
 ---
 Quoting [Grant Sanderson](https://www.youtube.com/watch?v=W3I3kAg2J7w):

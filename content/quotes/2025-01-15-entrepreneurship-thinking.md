@@ -1,7 +1,6 @@
 ---
 date: 2025-01-15
-tags:
-  - quote
+slug: "entrepreneurship-thinking"
 ref: https://caseyhandmer.wordpress.com/2024/09/04/entrepreneurship-changed-the-way-i-think/
 ---
 Quoting [Casey Handmer's blog](https://caseyhandmer.wordpress.com/2024/09/04/entrepreneurship-changed-the-way-i-think/):
