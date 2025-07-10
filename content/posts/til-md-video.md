@@ -1,8 +1,8 @@
 ---
 title: "TIL: Webkit supports videos in <img> tags"
 date: 2025-07-10T16:26:07+09:00
+tags: [webkit, chromium, web, hugo, markdown, bug, til, blog]
 draft: false
-tags: []
 ---
 
 I just published [a post with gifs and videos](/p/claude-code-setup) and was pretty happy with how it was looking.
