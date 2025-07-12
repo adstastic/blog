@@ -7,7 +7,9 @@ tags:
 ref: https://youtube.com/watch?v=CjSWwmg-JRM&amp;si=d2DqUUYFI2vmGg98
 ---
 
-I feel really seen by this. For years I've tried to be dilligent with PKM and read-it-later tools. There are some workflows that are useful e.g. these quotes are parsed from my highlights of the transcript of the Youtube video in [Reader](https://readwise.io/read), but overall my journey mirrors the author's, and the underlying psychology it exposes is uncomfortable to comprehend. I'm not sure I'll take the drastic measure of deleting it all like they did, but it's given me serious pause for thought. Regarding bolded sections, it seems absurd to highlight something, then further emphasise by bolding parts of it - I do it to capture the parts that really hit home, while providing context around it.
+I feel really seen by this. For years I've tried to be dilligent with PKM and read-it-later tools. There are some workflows that are useful e.g. these quotes are parsed from my highlights of the transcript of the Youtube video in [Reader](https://readwise.io/read), but overall my journey mirrors the author's, and the underlying psychology it exposes is uncomfortable to comprehend. I'm not sure I'll delete it all, but it's given serious pause for thought.
+
+The irony: this posts plays into the same fallacy the video exposes: will I reflect on it again? Or having done the act of saving, highlighting, documenting, is it condemned to the archives, never to traverse my neurons again?
 
 Quoting [Westenberg](https://youtube.com/watch?v=CjSWwmg-JRM&amp;si=d2DqUUYFI2vmGg98):
 
