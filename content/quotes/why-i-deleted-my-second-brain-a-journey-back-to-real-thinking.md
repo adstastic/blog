@@ -7,6 +7,8 @@ tags:
 ref: https://youtube.com/watch?v=CjSWwmg-JRM&amp;si=d2DqUUYFI2vmGg98
 ---
 
+I feel really seen by this. For years I've tried to be dilligent with PKM and read-it-later tools. There are some workflows that are useful e.g. these quotes are parsed from my highlights of the transcript of the Youtube video in [Reader](https://readwise.io/read), but overall my journey mirrors the author's, and the underlying psychology it exposes is uncomfortable to comprehend. I'm not sure I'll take the drastic measure of deleting it all like they did, but it's given me serious pause for thought. Regarding bolded sections, it seems absurd to highlight something, then further emphasise by bolding parts of it - I do it to capture the parts that really hit home, while providing context around it.
+
 Quoting [Westenberg](https://youtube.com/watch?v=CjSWwmg-JRM&amp;si=d2DqUUYFI2vmGg98):
 
 > over time, my second brain became a moraleum, a dusty collection of old selves, old interests, old compulsions piled on top of each other like geological strata. Instead of accelerating my thinking, it began to replace it. Instead of aiding memory, it froze my curiosity into static categories.
