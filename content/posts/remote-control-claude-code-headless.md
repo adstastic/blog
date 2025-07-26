@@ -10,16 +10,52 @@ tags:
   - tailscale
 ---
 
-This post covers setting up a headless Mac mini for remote Claude Code access that survives system restarts. My [original remote control setup](/p/remote-control-claude-code/) works well for laptops but requires manual intervention after a Mac mini restart.
+I previously wrote about [using Claude Code from my phone](/p/remote-control-claude-code/).  
+Since then, I've ported that to a headless Mac Mini. This is the updated setup.
 
-## Why tailscaled
+## Why
 
-According to [Tailscale's macOS comparison table](https://tailscale.com/kb/1065/macos-variants), there are three ways to run Tailscale on macOS. For headless servers, `tailscaled` is the only option that:
+One of the [key principles of working with agents](/p/tai-talk) is to steer early and often. You can only do that if you keep an eye on them. This setup enables me to connect to a Claude Code session running on my Mac Mini at home from my phone and macbook, so I can seamless switch between them. This allows me to start work on my laptop, leave it running, and keep an eye on it while I'm away.
 
-- Runs as a system daemon before user login
-- Survives restarts without physical access
-- Enables SSH access immediately after boot
+## Prerequisites
 
+- An always-online Mac you can use as a server (doesn't have to be a Mac Mini)
+- Another computer for initial setup
+- [Tailscale](https://tailscale.com) account
+- A phone with a terminal app
+- Basic terminal knowledge
+
+## Initial Setup
+
+This is the only step where you need physical access to the Mac Mini.
+
+Tip: If you have another Mac, you can use that Mac's mouse/keyboard to control the Mac Mini if you login to your iCloud account.
+
+1. Setup the Mac Mini with a user account and connect to your WiFi
+1. System Preferences → Sharing → Remote Login
+1. Note the local IP address (e.g. `192.168.1.100`)
+3. SSH in from your other laptop: `ssh username@192.168.1.100`
+
+## Continue over SSH
+
+Now let's install the basics:
+
+```bash
+# Install [Homebrew](https://brew.sh)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Install dependencies
+brew install go tmux reattach-to-user-namespace
+
+# Optional: Install mosh for reliable mobile connections
+# if your mobile shell app supports it
+brew install mosh
+```
+
+## tailscaled
+
+According to [Tailscale's macOS comparison table](https://tailscale.com/kb/1065/macos-variants), there are three ways to run Tailscale on macOS. 
 The trade-offs include:
 - No GUI
 - Incomplete Taildrop support
@@ -28,33 +64,14 @@ The trade-offs include:
 - No automatic updates
 - Requires command-line management
 
-## Prerequisites
+In my original post, I tried then dropped tailscaled because of these tradeoffs.  
+However, for headless servers, it's the only option that works because:
 
-- Mac mini for headless operation
-- Another Mac for initial setup
-- Tailscale account
-- For mobile access: iPhone with [Blink Shell](https://blink.sh/) or similar
-- Basic terminal knowledge
+- Runs as a system daemon before user login
+- Survives restarts without physical access
+- Enables SSH access immediately after boot
 
-## Initial Setup (one-time physical access)
-
-First, enable Remote Login on the Mac mini:
-1. System Preferences → Sharing → Remote Login
-2. Note the local IP address (like `192.168.1.100`)
-3. SSH in from your other Mac: `ssh username@192.168.1.100`
-
-Now let's install the basics:
-
-```bash
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Install dependencies
-brew install go tmux mosh reattach-to-user-namespace
-```
-
-## Building tailscaled
+### Install
 
 Build and install tailscaled from source:
 
@@ -93,7 +110,8 @@ setw -g pane-base-index 1
 
 ## Auto-attach Configuration
 
-Add to `~/.local.zsh` (and source it from `~/.zshrc`):
+For a seamless experience, you need to auto attach to the same tmux session on SSH login. 
+I sync my dotfiles between machines, and I don't want this behaviour on my laptop, so I put local bits like this in `~/.local.zsh` (and source it from `~/.zshrc`).
 
 ```bash
 # Auto-attach to tmux session for SSH connections (except iTerm2 -CC mode)
@@ -106,7 +124,8 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 fi
 ```
 
-This automatically attaches SSH sessions to tmux while preserving iTerm2 integration mode.
+I use [iTerm2](https://iterm2.com) as my shell, and  `-CC` enables its [tmux integration](https://iterm2.com/documentation-tmux-integration.html), where tmux windows become native iTerm tabs.
+You probably don't need it if you use another shell.
 
 ## Security Hardening
 
@@ -141,44 +160,58 @@ networksetup -setdnsservers Ethernet 100.100.100.100
 ```
 
 See the [Tailscaled on macOS wiki](https://github.com/tailscale/tailscale/wiki/Tailscaled-on-macOS) for more details.
+This is only required if you want to use MagicDNS **from the server** e.g. to access other services on your tailnet.
 
 ## Client Setup
 
-On your main Mac, add to `~/.zshrc`:
+### Laptop
+
+On your laptop, add to `~/.zshrc`:
 
 ```bash
-alias iron="ssh iron -t 'tmux -CC new-session -A -s main'"
+alias macmini="ssh macmini -t 'tmux -CC new-session -A -s main'"
 ```
 
-This uses iTerm2's integration mode where tmux windows become native iTerm tabs.
+Again, if you aren't using iTerm2, you can probably omit the `-CC` flag.
 
-On your iPhone with Blink:
-1. Add your Tailscale host
-2. Connect with: `mosh iron`
+### Phone
+
+Download the Tailscale app and connect to your tailnet.
+Download a mobile shell app.  
+I use [Blink](https://blink.sh). Free alternative: [Termius](https://termius.com).
+
+Connect to your server with `ssh` or [Mosh](https://mosh.org) for more reliable mobile connections.
+```
+mosh adi@macmini
+```
 
 Mosh provides persistent connections that survive network changes.
 
 ## Usage
 
-Start Claude Code in your tmux session:
-```bash
-claude
-```
+If you setup things the way I did:
+- Connect from laptop: `macmini` (opens native iTerm windows)
+- Connect from iPhone: `mosh macmini` (persistent connection)
 
-Key commands:
+The first time (or when the auth expires), Tailscale will pop a login window, it's a seamless experience.
+
+### Key commands:
+
 - Detach from tmux: `Ctrl-B D` (not `Ctrl-D` which kills the shell)
-- From Mac: `iron` (opens native iTerm windows)
-- From iPhone: `mosh iron` (persistent connection)
-- Resume Claude after crash: `claude -c`
+- Resume Claude after an interrupted session: `claude -c`
+
+If you kill or leave the the tmux session, just logout and login again. You'll automatically reconnect to the existing session if it still exists, or a new one will be created.
 
 ## Alternatives
 
-For different use cases:
+Any kind of homelab setup needs Tailscale, but you can skip all the terminal steps if you just want a Claude Code session with **[VibeTunnel](https://vibetunnel.sh)**, a Web-based experience. It's pretty nice but I prefer the mobile UX of a terminal app so I mostly use my setup.
 
-- **[VibeTunnel](https://vibetunnel.sh)**: Web-based terminal that still requires Tailscale but no tmux configuration
-- **[Original setup](/p/remote-control-claude-code/)**: Better suited for laptops and non-headless machines
-- **Native mobile apps**: Currently in development (e.g., https://x.com/0xKyon/status/1946660320275304827)
+People are building **native mobile apps** for this, so at some point there will be a really polished experience. I'm on the waitlist for [Kisuke](https://x.com/0xKyon/status/1946660320275304827) which seems like a really polished experience.
+
+If you don't have a server, refer to my **[original setup](/p/remote-control-claude-code/)** for running this on your laptop, so you can still leave your desk without leaving Claude.
 
 ## Summary
 
 This setup enables truly headless operation of a Mac mini running Claude Code. The key is using `tailscaled` as a system daemon, which is the only Tailscale variant that runs before user login. Combined with tmux for session persistence and mosh for reliable mobile connections, you get a robust remote development environment that survives restarts and network changes.
+
+Any bugs, improvements, or questions, please [email](mailto:hi@adim.in) or [DM](https://x.com/adstastic) me.
