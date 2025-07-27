@@ -1,7 +1,11 @@
 ---
 layout: post
 title: Having my BRP and Passport stolen in Barcelona
-tags: [travel, crime, log]
+draft: true
+tags:
+  - travel
+  - crime
+  - log
 --- 
 
 _This is an account of my recent experience of having my backpack with all my possessions (including my passport and BRP) stolen whilst on holiday in Barcelona._
