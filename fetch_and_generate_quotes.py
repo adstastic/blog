@@ -242,19 +242,37 @@ class ReadwiseV2Exporter:
         return all_sources
 
 
+# Snipd exports this literal string as the highlight text instead of the
+# snippet itself. Readwise stores it verbatim, so it is not recoverable via the
+# API — 14 sources hold nothing else. Treat it as absent rather than content.
+PLACEHOLDER_HIGHLIGHTS = {"1min snip"}
+
+
+def is_real_highlight(highlight: HighlightItem) -> bool:
+    # text is a required str on the model, so Pydantic already rules out None.
+    text = highlight.text.strip()
+    return bool(text) and text.lower() not in PLACEHOLDER_HIGHLIGHTS
+
+
 def generate_markdown_from_source(
     source: BookSource, template_env: Environment, output_dir_path: Path
 ) -> None:
     latest_highlight_date: Optional[AwareDatetime] = None
     date_source_field = "none"
 
-    if not source.highlights:
+    # Filter before the emptiness check so a source whose highlights are all
+    # placeholders is skipped entirely rather than published as a stub. Without
+    # this the site accumulated 8 posts whose whole body read "> 1min Snip".
+    real_highlights = [h for h in source.highlights if is_real_highlight(h)]
+
+    if not real_highlights:
         logger.warning(
-            f"Source '{source.title}' (ID: {source.user_book_id}) has no highlights. Skipping."
+            f"Source '{source.title}' (ID: {source.user_book_id}) has no usable "
+            f"highlights ({len(source.highlights)} found, all empty or placeholder). Skipping."
         )
         return
 
-    for highlight in source.highlights:
+    for highlight in real_highlights:
         current_highlight_dt: Optional[AwareDatetime] = highlight.highlighted_at
         current_field_name = "highlighted_at"
 
@@ -315,8 +333,8 @@ def generate_markdown_from_source(
             "slug": slug,  # Add slug to template data
             "category": source.category,
             "highlights": [
-                h.text for h in source.highlights if h.text
-            ],  # Simplified to list of strings
+                h.text for h in real_highlights
+            ],  # placeholders and blanks already filtered
             "tags": [tag.name for tag in source.book_tags if tag.name]
             if source.book_tags
             else [],

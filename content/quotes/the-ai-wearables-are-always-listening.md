@@ -7,10 +7,6 @@ ref: https://share.snipd.com/episode/a9d3f559-7d2c-4240-ade2-a552859bf503
 
 Quoting [The Vergecast](https://share.snipd.com/episode/a9d3f559-7d2c-4240-ade2-a552859bf503):
 
-> 1min Snip
-
-> 1min Snip
-
 > **Garbage Truck**
 
 - David Pierce shares that the best AI experience he had was with an app that records his son yelling &#34;garbage truck&#34;. 

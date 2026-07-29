@@ -21,5 +21,3 @@ Oh my God.
 
 Riley
 They gloated. They were talking up their book. They were, they were, they wanted everybody to know that they have fired fucking everybody. If Klarna has accidentally cleaned out your bank account because it thinks you've bought two pairs of Balenciaga shoes, right? There's not a fucking human you can talk to. And that was the case for a year. And they're like, oops, actually that's super important that there's a person there that can't be replaced by ai we fucked up but of course it's being it's because this is a ceo he's like What an inspiration but it's like oh yeah it's weird this is coming out at the same time also that microsoft is like yeah we're not building any more ai data data centers there's not enough Demand okay okay
-
-> 1min Snip
