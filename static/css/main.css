@@ -260,6 +260,9 @@ article.post { margin-bottom: var(--space-8); }
   letter-spacing: 0.5px;
   margin-top: var(--space-8);
 }
+.post-content :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: var(--space-4);
+}
 .post-content h1 { font-size: var(--text-xl); }
 .post-content h2 { font-size: var(--text-lg); }
 .post-content h3 { font-size: var(--text-md); }
@@ -272,7 +275,7 @@ article.post { margin-bottom: var(--space-8); }
      decorative hover glyph, so it has to clear AA (rule is 2.48:1) */
   color: var(--text-2);
   text-decoration: none;
-  margin-right: 0.35em;
+  margin-right: 0.5em;
 }
 .post-content .anchor:hover { color: var(--link); text-decoration: underline; }
 
