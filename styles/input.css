@@ -120,17 +120,28 @@
     }
 
     /* Keyboard focus had no visible indicator anywhere in the stylesheet.
-       :focus-visible rather than :focus so mouse clicks don't draw rings. */
+       :focus-visible rather than :focus so mouse clicks don't draw rings.
+       Ink-coloured rather than accent-coloured: a blue ring reads as a stray
+       browser artifact, the text colour reads as part of the design. */
     :where(a, button, input, .toggle-slider):focus-visible {
-        outline: 2px solid var(--color-blue);
+        outline: 2px solid var(--text-primary);
         outline-offset: 2px;
+    }
+
+    /* The masthead is an inverted chip AND the first tab stop, so a ring drawn
+       outside it haloes a dark block against cream — which is what the blue
+       version looked like. Draw it inside in the chip's own text colour so it
+       reads as a cursor box. */
+    .smallcap a:focus-visible {
+        outline: 2px solid var(--bg-primary);
+        outline-offset: -6px;
     }
 
     /* The toggle input was opacity-0 w-0 h-0, i.e. zero-dimension, so even the
        UA default focus ring had nothing to draw around. Cover the switch
        instead of collapsing, and let the slider show the ring. */
     .toggle-input:focus-visible + .toggle-slider {
-        outline: 2px solid var(--color-blue);
+        outline: 2px solid var(--text-primary);
         outline-offset: 2px;
     }
 
@@ -254,8 +265,11 @@
         @apply text-[2rem] font-bold m-0 flex-shrink-0;
     }
 
+    /* transition-colors, not transition-all: `all` animates outline-color and
+       outline-offset too, so the focus ring faded and slid into place over
+       300ms instead of appearing the instant you tab to it. */
     .smallcap a {
-        @apply no-underline tracking-[2px] bg-[var(--text-primary)] text-[var(--bg-primary)] px-2 py-1 transition-all duration-300;
+        @apply no-underline tracking-[2px] bg-[var(--text-primary)] text-[var(--bg-primary)] px-2 py-1 transition-colors duration-300;
     }
 
     .smallcap a:hover {
