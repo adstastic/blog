@@ -150,7 +150,11 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
   width: 100%;
   max-width: var(--measure);
   margin-inline: auto;
-  padding: var(--space-8) var(--space-6);
+  /* --pad owns the horizontal padding so full-bleed children can negate
+     exactly it. Hard-coding the bleed overflowed by 4px at 390px, where the
+     padding is smaller than the bleed was. */
+  --pad: var(--space-6);
+  padding: var(--space-8) var(--pad);
 }
 
 /* The rule belongs to the header it terminates. 12/12 is deliberate: the
@@ -388,7 +392,7 @@ article.post { margin-bottom: var(--space-8); }
 /* ── 6. RESPONSIVE ─────────────────────────────────────────────────────────
    Three breakpoints, and only three. */
 @media (max-width: 768px) {
-  .page-content { padding: var(--space-6) var(--space-4); }
+  .page-content { --pad: var(--space-4); padding: var(--space-6) var(--pad); }
   .post-title   { font-size: var(--text-xl); }
 }
 
@@ -400,14 +404,16 @@ article.post { margin-bottom: var(--space-8); }
   .post-meta .tags { display: flex; width: 100%; }
   /* full-bleed code and quotes. .highlight owns its own padding, so it is
      handled separately — the two used to conflict across cascade layers. */
-  pre:not(.chroma), blockquote { margin-inline: calc(var(--space-4) * -1); border-radius: 0; }
-  .highlight { margin-inline: calc(var(--space-4) * -1); border-radius: 0; }
+  pre:not(.chroma), blockquote, .highlight {
+    margin-inline: calc(var(--pad) * -1);
+    border-radius: 0;
+  }
   .toggle-switch { --toggle-w: 2rem; --toggle-h: 1.125rem; --knob: 0.875rem; }
   .smallcap { font-size: var(--text-md); }
 }
 
 @media (max-width: 400px) {
-  .page-content { padding: var(--space-4) var(--space-3); }
+  .page-content { --pad: var(--space-3); padding: var(--space-4) var(--pad); }
   .smallcap { font-size: var(--text-base); }
   nav { gap: var(--space-2); }
 }
