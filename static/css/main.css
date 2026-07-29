@@ -99,7 +99,9 @@ a:hover { text-decoration: underline; }
   outline-offset: 2px;
 }
 
-ul, ol { margin-left: var(--space-8); }
+/* Indent with padding, not margin: the marker lives in the padding, so the
+   UA's own padding-inline-start would stack on top of a margin and double it. */
+ul, ol { margin-left: 0; padding-left: var(--space-6); }
 ul { list-style: disc; }
 ol { list-style: decimal; }
 li > ul, li > ol { margin-bottom: 0; }
@@ -193,7 +195,7 @@ nav a:hover { color: var(--link); text-decoration: underline; }
 
 .home section + section { margin-top: var(--space-8); }
 
-.post-list { list-style: none; margin-left: 0; }
+.post-list { list-style: none; margin-left: 0; padding-left: 0; }
 .post-list > li {
   display: flex;
   align-items: baseline;
@@ -258,27 +260,21 @@ article.post { margin-bottom: var(--space-8); }
   letter-spacing: 0.5px;
   margin-top: var(--space-8);
 }
-/* the prefix shows the heading's markdown depth */
-.post-content h1::before { content: "# ";   color: var(--rule); font-weight: 400; }
-.post-content h2::before { content: "## ";  color: var(--rule); font-weight: 400; }
-.post-content h3::before { content: "### "; color: var(--rule); font-weight: 400; }
 .post-content h1 { font-size: var(--text-xl); }
 .post-content h2 { font-size: var(--text-lg); }
 .post-content h3 { font-size: var(--text-md); }
 .post-content h4, .post-content h5, .post-content h6 { font-size: var(--text-base); }
 
+/* the depth marker IS the permalink — always visible, always focusable */
 .post-content .anchor {
-  position: absolute;
-  left: calc(var(--space-6) * -1);
   font-weight: 400;
+  /* --text-2, not --rule: this is persistent visible text now, not a
+     decorative hover glyph, so it has to clear AA (rule is 2.48:1) */
   color: var(--text-2);
   text-decoration: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  margin-right: 0.35em;
 }
-.post-content h1:hover .anchor, .post-content h2:hover .anchor,
-.post-content h3:hover .anchor, .post-content h4:hover .anchor,
-.post-content h5:hover .anchor, .post-content h6:hover .anchor { opacity: 1; }
+.post-content .anchor:hover { color: var(--link); text-decoration: underline; }
 
 .related-posts {
   margin-block: var(--space-8);
@@ -291,13 +287,15 @@ article.post { margin-bottom: var(--space-8); }
   font-size: var(--text-md);
   margin-top: 0;
 }
-.related-posts ul { list-style: none; margin-left: 0; margin-bottom: 0; }
+.related-posts ul { list-style: none; margin-left: 0; padding-left: 0; margin-bottom: 0; }
 .related-posts li { margin-bottom: var(--space-1); }
+.related-posts a { color: var(--text); text-decoration: none; }
+.related-posts a:hover { color: var(--link); text-decoration: underline; }
 
 /* was used in terms.html/term.html and defined nowhere, so "All Tags"
    rendered as ordinary body copy */
 .site-intro { font-family: var(--font-mono); font-size: var(--text-md); color: var(--text-2); }
-.tag-list { list-style: none; margin-left: 0; }
+.tag-list { list-style: none; margin-left: 0; padding-left: 0; }
 .tag-list li { margin-bottom: var(--space-1); }
 .tag-count { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-2); }
 
@@ -397,7 +395,6 @@ article.post { margin-bottom: var(--space-8); }
   .post-date { font-size: var(--text-xs); }
   .post-meta { display: flex; flex-direction: column; gap: var(--space-1); }
   .post-meta .tags { display: flex; width: 100%; }
-  .post-content .anchor { display: none; }
   /* full-bleed code and quotes. .highlight owns its own padding, so it is
      handled separately — the two used to conflict across cascade layers. */
   pre:not(.chroma), blockquote { margin-inline: calc(var(--space-4) * -1); border-radius: 0; }

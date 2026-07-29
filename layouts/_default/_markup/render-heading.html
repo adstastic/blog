@@ -1,4 +1,8 @@
+{{- /* The markdown depth marker doubles as the permalink: no extra glyph, no
+     hover-reveal (invisible to keyboard and touch), and it can be a real
+     focusable link rather than an aria-hidden decoration. */ -}}
 <h{{ .Level }} id="{{ .Anchor | safeURL }}">
-  <a class="anchor" href="#{{ .Anchor | safeURL }}" aria-hidden="true" tabindex="-1">#</a>
+  <a class="anchor" href="#{{ .Anchor | safeURL }}"
+     aria-label="Link to this section">{{ strings.Repeat .Level "#" }}</a>
   {{ .Text | safeHTML }}
 </h{{ .Level }}>
