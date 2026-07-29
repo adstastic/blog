@@ -28,7 +28,7 @@ Overall, I chatted with it for 18 minutes, which cost me $0.36 on an Nvidia A10G
 
 This setup boots in ~15s (the first cold start will take a few minutes due to image build/model download), and Modal only bills for usage so with something like:
 
-```
+```bash
 modal run ollama-modal.py --text "Your prompt here"
 ```
 

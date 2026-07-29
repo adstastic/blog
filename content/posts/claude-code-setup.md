@@ -19,7 +19,7 @@ Add `export ENABLE_BACKGROUND_TASKS=1` in your shell profile to allow claude to 
 ## MCP servers
 
 MCP servers can be local or remote. Installing them to claude code is either done by adding a block like:
-```
+```json
 "mcpServers": {
   "puppeteer": {
     "type": "stdio",

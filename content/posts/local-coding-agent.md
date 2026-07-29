@@ -47,7 +47,7 @@ Fix it by replacing the default template with one like [this](https://gist.githu
 
 - Install [OpenCode](https://opencode.ai)
 - Create a config file at `~/.config/opencode/opencode.json` with the following, replacing `$BASE_URL` with the "Reachable At" URL from LM Studio:
-```
+```json
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {

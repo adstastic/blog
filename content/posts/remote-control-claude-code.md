@@ -43,24 +43,24 @@ Prerequisites:
 1. Install Tailscale.app and connect to the Tailnet. The standalone app is recommended.
 1. Copy the **public key** from your phone to your computer, and save it in `~/.ssh/authorized_keys`. Create the directory if not exists.
 1. Set permissions:
-```
+```bash
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 ```
 1. [Enable Remote Login in System Preferences](https://support.apple.com/lt-lt/guide/mac-help/mchlp1066/mac), restrict it to your user.
 1. Edit `/etc/ssh/sshd_config` (requires sudo) and upsert the following to replace password auth with SSH key:
-```
+```text
 PubkeyAuthentication yes
 PasswordAuthentication no
 ```
 1. Restart the SSH service:
-```
+```bash
 sudo launchctl stop com.openssh.sshd
 sudo launchctl start com.openssh.sshd
 ```
 1. [Install tmux](https://github.com/tmux/tmux/wiki/Installing)
 1. Add this to `~/.tmux.conf` to allow mouse scroll and set a large history buffer, very useful on mobile and with claude code.
-```
+```text
 set -g history-limit 1000000
 set -g mouse on
 ```

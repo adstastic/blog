@@ -181,7 +181,7 @@ Download a mobile shell app.
 I use [Blink](https://blink.sh). Free alternative: [Termius](https://termius.com).
 
 Connect to your server with `ssh` or [Mosh](https://mosh.org) for more reliable mobile connections.
-```
+```bash
 mosh adi@macmini
 ```
 

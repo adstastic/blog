@@ -18,7 +18,7 @@ Once you have a video you want to make a GIF, here's how:
 
 1. Download and install [`ffmpeg`](https://ffmpeg.org/download.html). Easiest way on MacOS is `brew install ffmpeg`[^brew]. 
 2. Run the following command[^ffmpeg], changing the filepaths `input.mov`, `output.gif`, and the settings `fps=10` and `scale=640` as required. 
-```
+```bash
 ffmpeg -i input.mov -vf "fps=10,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 output.gif
 ```
 3. Preview the GIF and adjust the scale/fps as needed for its level of detail. The height will scale proportionally.

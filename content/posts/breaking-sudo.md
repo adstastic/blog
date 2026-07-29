@@ -18,7 +18,7 @@ Turning this off from **Preferences > Advanced > Allow sessions to survive loggi
 However, once this feature was gone I realised I missed it and it's absence was a black hole[^2] in the fabric of my developer experience so I found a [workaround](https://github.com/fabianishere/pam_reattach). After following the installation and usage instructions, I was ready to use my finger for sudo as well as have my terminal sessions survive logouts.
 
 Here's what happened next:
-```
+```console
 $ sudo ls
 sudo: unable to initialize PAM: No such file or directory
 ```

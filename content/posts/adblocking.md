@@ -27,7 +27,7 @@ tags:
 8. SSH to the Pi: `ssh pi@<IP address>`. It's a new host, so respond *yes* to `Are you sure you want to continue connecting?`. The default password is `raspberry`.
 9. Change the password as instructed using `passwd`
 10. Install Pi-Hole
-```
+```bash
 wget -O basic-install.sh https://install.pi-hole.net
 ```
 11. Note down the admin console password at the end.

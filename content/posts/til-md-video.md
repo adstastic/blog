@@ -13,7 +13,7 @@ I use [Orion](https://kagi.com/orion/), which is a Webkit-based browser (like Sa
 Why were these videos rendering fine in Webkit and not Chromium?
 
 This blog is powered by [Hugo](https://gohugo.io/), and the posts written as Markdown. In that blog post, I had attached the videos using the markdown image syntax
-```
+```markdown
 ![alt text](video.mp4)
 ```
 which rendered to HTML as an `<img>` tag. This broke in Chromium because it strictly requires `<video>` tags for video content.
@@ -28,11 +28,11 @@ I recommend reading the [deep dive on this](https://calendar.perfplanet.com/2017
 ## The fix
 
 This was fixed by adding a [custom shortcode](https://gohugo.io/content-management/shortcodes/) that expanded to a `<video>` tag. Now, the following markdown:
-```
+```text
 {{</* video src="video.mp4" */>}}
 ```
 renders to the following HTML:
-```
+```html
 <video controls width="100%">
   <source src="{{ .Get "src" }}" type="video/mp4">
   Your browser does not support the video tag.

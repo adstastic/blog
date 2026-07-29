@@ -9,7 +9,7 @@ Claude Code is my weird-intern-in-a-terminal[^weird-intern] and it's surprisingl
 
 [^weird-intern]: https://simonwillison.net/2024/Sep/10/software-misadventures/#the-weird-intern
 
-```
+```text
 > commit and push this code
   ⎿  Found 6 new diagnostic issues in 1 file (ctrl-r to expand)
 
@@ -30,7 +30,7 @@ I get worried when I see wildcard commands because they not only have a larger b
 
 Let's try to make Claude more meticulous.
 
-```
+```text
 > add patch by patch
 
 ⏺ I'll add the changes patch by patch to make the commit history clearer.
@@ -49,7 +49,7 @@ Let's try to make Claude more meticulous.
 
 Again! It skips the diff check and adds the whole dir. Maybe my prompt left room for interpretation? Let's be more specific:
 
-```
+```text
 > use git add --patch
 
 ⏺ I'll use git add --patch to interactively stage changes.
@@ -82,7 +82,7 @@ All you have to do is create a file in your global or project-level `.claude/` n
 Now when I run `/commit`, Claude methodically reviews each change before staging. LLMs are non-deterministic, so I still keep an eye on it, but it mostly works and is a huge improvement from before.
 
 {{< details summary="Click to see an example" >}}
-```
+```text
 > /commit is running…
 
 ⏺ I'll help you commit the changes. Let me first check the status and review the modified

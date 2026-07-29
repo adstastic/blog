@@ -39,7 +39,7 @@ How was this possible?
 
 `htop` has a nice Tree feature. This is the tree I was climbing:
 
-```
+```text
 ├─ /Applications/Ghostty.app/Contents/MacOS/ghostty
 │  ├─ login
 │  │  └─ -/bin/zsh
@@ -59,7 +59,7 @@ So I quit my terminal app (Ghostty.app), and the downloads stopped.
 * **htop’s tree mode** makes it easy to inspect and kill at the right level of the process tree.
 
 * **ctrl-D exiting a tab in Ghostty might leave things running** as the shell integration by default may not always detect background processes and loops when closing tabs. There are a number of settings to improve this e.g.
-```
+```ini
 shell-integration = zsh
 quit-after-last-window-closed = true
 wait-after-command = true
