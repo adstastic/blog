@@ -26,11 +26,11 @@ This tutorial covers setting up OpenCode with LM Studio for local inference on a
 - Go for the highest memory footprint you can fit on your hardware for best capabilities, the lowest for fastest inference
 ![qwen3-coder-30b variants](/assets/qwen3-coder-30b-variants.png)
 - Run the LM Studio server
-![Running LM Studio server](/assets/lms-start-server.mp4)
+{{< video src="/assets/lms-start-server.mp4" alt="Running LM Studio server" >}}
 - Load the model. Set the context window to at least 16k, otherwise there isn't enough context for OpenCode's prompts. Save these params for future.
-![Loading qwen3-coder-30b](/assets/lms-loading-qwen3-coder-30b.mp4)
+{{< video src="/assets/lms-loading-qwen3-coder-30b.mp4" alt="Loading qwen3-coder-30b" >}}
 - Test it works - copy the URL shown in `Reachable at` and curl `/v1/models`
-![curl API to list models](/assets/lms-list-models.mov)
+{{< video src="/assets/lms-list-models.mp4" alt="curl API to list models" >}}
 
 #### Fix qwen3-coder tool calling format
 
@@ -40,7 +40,7 @@ This isn't an issue with `gpt-oss` as it uses the new JSON-based [Harmony](https
 ![qwen3-coder-30b malformed tool call](/assets/qwen3-coder-30b-bad-tool-call.png)
 
 Fix it by replacing the default template with one like [this](https://gist.github.com/adstastic/71632f39f4ea8d7facc2eddf0e46b3fd) and reloading the model.
-![Updating a model's system prompt template](/assets/lms-qwen3-sysprompt-template.mp4)
+{{< video src="/assets/lms-qwen3-sysprompt-template.mp4" alt="Updating a model's system prompt template" >}}
 
 
 ## OpenCode
@@ -70,7 +70,7 @@ Fix it by replacing the default template with one like [this](https://gist.githu
 }
 ```
 - Run `opencode` and `/model` to select the model. It'll be listed under `LM Studio (local)`
-![Selecting the model in OpenCode](/assets/opencode-models.mp4)
+{{< video src="/assets/opencode-models.mp4" alt="Selecting the model in OpenCode" >}}
 - Keen an eye on the LM Studio server logs for any errors
 - Enjoy!
 
@@ -92,7 +92,7 @@ I also tested these workflows with `gpt-oss-120b` hosted on [Cerebras](https://w
 
 I highly recommend trying a [Cerebras](https://www.cerebras.ai) backend, with OpenCode, [Cline](https://inference-docs.cerebras.ai/integrations/cline), or their playground - the speed is incredible and it's got a free tier. Claude Code with such performance would be magical, no more waiting for responses.
 
-![ultra fast inference with gpt-oss-120b on Cerebras](/assets/gpt-oss-120b-cerebras-speed.mp4)
+{{< video src="/assets/gpt-oss-120b-cerebras-speed.mp4" alt="ultra fast inference with gpt-oss-120b on Cerebras" >}}
 
 ## Performance
 
@@ -100,7 +100,7 @@ Apple Silicon is very different from Nvidia hardware. With any local model, espe
 
 Here's an example of the memory usage on my Mac Mini with loading and chatting with `gpt-oss-20b`, with [llm](https://github.com/simonw/llm) to make requests and [asitop](https://github.com/tlkh/asitop) to profile.
 
-![gpt-oss-20b inference](/assets/gpt-oss-20b-inference.mp4) 
+{{< video src="/assets/gpt-oss-20b-inference.mp4" alt="gpt-oss-20b inference" >}} 
 
 #### `llm`
 
