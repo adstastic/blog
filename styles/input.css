@@ -29,6 +29,12 @@
 
 /* CSS custom properties for theme switching */
 :root {
+    /* Tell the UA which scheme is live so native scrollbars, form controls and
+       the overscroll area follow the theme instead of staying light. Declared
+       explicitly per class rather than `light dark`, which would let the OS
+       preference disagree with .dark-theme. */
+    color-scheme: light;
+
     /* Light mode (default) */
     --bg-primary: var(--color-base3);
     --bg-secondary: var(--color-base2);
@@ -41,6 +47,7 @@
 /* Dark mode */
 .dark,
 .dark-theme {
+    color-scheme: dark;
     --bg-primary: var(--color-base03);
     --bg-secondary: var(--color-base02);
     --text-primary: var(--color-base1);
@@ -51,6 +58,12 @@
 
 /* Base styles layer */
 @layer base {
+    /* body carries the background, but the overscroll area and scrollbar
+       gutter are painted from html — without this they stay cream in dark mode. */
+    html {
+        background-color: var(--bg-primary);
+    }
+
     /* Apply default font and colors to body */
     body {
         font-family: var(--font-family-sans);
@@ -93,6 +106,32 @@
 
     a:hover {
         text-decoration: underline;
+    }
+
+    /* Prose links carry a non-colour cue. Solarized blue sits at only 1.46:1
+       against body text, so colour alone cannot distinguish a link from the
+       sentence around it (WCAG 1.4.1). Excludes .anchor, which is the heading
+       permalink glyph, not prose. */
+    .post-content a:not(.anchor),
+    blockquote a,
+    .copyright a {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+    }
+
+    /* Keyboard focus had no visible indicator anywhere in the stylesheet.
+       :focus-visible rather than :focus so mouse clicks don't draw rings. */
+    :where(a, button, input, .toggle-slider):focus-visible {
+        outline: 2px solid var(--color-blue);
+        outline-offset: 2px;
+    }
+
+    /* The toggle input was opacity-0 w-0 h-0, i.e. zero-dimension, so even the
+       UA default focus ring had nothing to draw around. Cover the switch
+       instead of collapsing, and let the slider show the ring. */
+    .toggle-input:focus-visible + .toggle-slider {
+        outline: 2px solid var(--color-blue);
+        outline-offset: 2px;
     }
 
     /* Lists */
@@ -303,7 +342,7 @@
     }
 
     .toggle-input {
-        @apply opacity-0 w-0 h-0;
+        @apply absolute inset-0 opacity-0 cursor-pointer m-0;
     }
 
     .toggle-slider {

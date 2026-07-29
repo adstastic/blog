@@ -22,55 +22,36 @@
       gtag('config', 'G-MBR26ZPS1G');
     </script>
     <script>
-        // Apply theme immediately to prevent flash
+        // Runs before first paint to prevent a flash of the wrong theme.
+        // An explicit choice wins; absent one, follow the OS.
         (function() {
-            const theme = localStorage.getItem('theme');
-            if (theme === 'dark') {
-                // Set a class on html element that we can target with CSS
-                document.documentElement.classList.add('dark-theme');
-            }
+            const stored = localStorage.getItem('theme');
+            const dark = stored
+                ? stored === 'dark'
+                : matchMedia('(prefers-color-scheme: dark)').matches;
+            if (dark) document.documentElement.classList.add('dark-theme');
         })();
     </script>
 </head>
 <body>
-    <div class="page-content relative py-8 px-6 mx-auto box-border max-w-[48rem] w-full">
+    <main class="page-content relative py-8 px-6 mx-auto box-border max-w-[48rem] w-full">
         {{ block "main" . }}{{ end }}
-    </div>
-    
+    </main>
+
     <script>
-        // Dark mode toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        // The head script already decided the theme; this only syncs the
+        // checkbox to it and records an explicit choice. html.dark-theme is
+        // the single source of truth — body[data-theme] was written here for
+        // years and no CSS ever read it.
+        (function() {
             const toggle = document.getElementById('dark-mode-toggle');
-            const body = document.body;
             const html = document.documentElement;
-            
-            // Check for saved theme preference or default to light
-            const currentTheme = localStorage.getItem('theme') || 'light';
-            
-            // Apply the current theme to body (sync with head script)
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'dark');
-                html.classList.add('dark-theme');
-                toggle.checked = true;
-            } else {
-                body.removeAttribute('data-theme');
-                html.classList.remove('dark-theme');
-                toggle.checked = false;
-            }
-            
-            // Toggle theme on change
+            toggle.checked = html.classList.contains('dark-theme');
             toggle.addEventListener('change', function() {
-                if (this.checked) {
-                    body.setAttribute('data-theme', 'dark');
-                    html.classList.add('dark-theme');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    body.removeAttribute('data-theme');
-                    html.classList.remove('dark-theme');
-                    localStorage.setItem('theme', 'light');
-                }
+                html.classList.toggle('dark-theme', this.checked);
+                localStorage.setItem('theme', this.checked ? 'dark' : 'light');
             });
-        });
+        })();
     </script>
 </body>
 </html>

@@ -7,18 +7,18 @@ hideDate: true
 Software engineer with a decade of experience from small startups to SRE at Apple.  
 Nowadays I split my time between:
 
-#### VC
+## VC
 - In-house software development
 - Technical due diligence
 - Deal sourcing
 - Market analysis
 
-#### Consulting
+## Consulting
 - Technical & product challenges
 - Digital transformation & AI adoption
 - Educating developers on using leveraging AI tools
 
-#### Personal projects
+## Personal projects
 - Self-hosted infrastructure
 - Local AI
 - Developer tools

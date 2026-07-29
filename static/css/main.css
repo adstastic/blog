@@ -176,6 +176,9 @@
   ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
     padding-block: 0;
   }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
   :-moz-ui-invalid {
     box-shadow: none;
   }
@@ -241,30 +244,11 @@
   .max-w-\[48rem\] {
     max-width: 48rem;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink {
     flex-shrink: 1;
   }
-  .flex-grow {
-    flex-grow: 1;
-  }
   .grow {
     flex-grow: 1;
-  }
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .transform {
-    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
-  .resize {
-    resize: both;
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
   }
   .border-b {
     border-bottom-style: var(--tw-border-style);
@@ -275,9 +259,6 @@
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
-  }
-  .underline {
-    text-decoration-line: underline;
   }
   .outline {
     outline-style: var(--tw-outline-style);
@@ -306,6 +287,7 @@
   }
 }
 :root {
+  color-scheme: light;
   --bg-primary: var(--color-base3);
   --bg-secondary: var(--color-base2);
   --text-primary: var(--color-base01);
@@ -314,6 +296,7 @@
   --border-color: var(--color-base1);
 }
 .dark, .dark-theme {
+  color-scheme: dark;
   --bg-primary: var(--color-base03);
   --bg-secondary: var(--color-base02);
   --text-primary: var(--color-base1);
@@ -322,6 +305,9 @@
   --border-color: var(--color-base01);
 }
 @layer base {
+  html {
+    background-color: var(--bg-primary);
+  }
   body {
     font-family: var(--font-family-sans);
     font-size: 1.125rem;
@@ -343,6 +329,18 @@
   }
   a:hover {
     text-decoration: underline;
+  }
+  .post-content a:not(.anchor), blockquote a, .copyright a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  :where(a, button, input, .toggle-slider):focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+  .toggle-input:focus-visible + .toggle-slider {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
   }
   ul, ol {
     margin-left: 2rem;
@@ -524,17 +522,14 @@
     margin-right: calc(var(--spacing) * 1);
     display: inline-block;
     vertical-align: text-top;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 1.5rem;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
     --tw-leading: 1;
     line-height: 1;
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
     color: var(--text-primary);
     text-decoration-line: none;
-    /* Ensure consistent rendering across browsers */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
   .post-title-link:hover .quote-indicator {
     color: var(--color-blue);
@@ -585,8 +580,10 @@
     align-items: center;
   }
   .toggle-input {
-    height: calc(var(--spacing) * 0);
-    width: calc(var(--spacing) * 0);
+    position: absolute;
+    inset: calc(var(--spacing) * 0);
+    margin: calc(var(--spacing) * 0);
+    cursor: pointer;
     opacity: 0%;
   }
   .toggle-slider {
@@ -1175,26 +1172,6 @@
     }
   }
 }
-@property --tw-rotate-x {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-rotate-y {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-rotate-z {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-skew-x {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-skew-y {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -1311,11 +1288,6 @@
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
-      --tw-rotate-x: initial;
-      --tw-rotate-y: initial;
-      --tw-rotate-z: initial;
-      --tw-skew-x: initial;
-      --tw-skew-y: initial;
       --tw-border-style: solid;
       --tw-outline-style: solid;
       --tw-blur: initial;

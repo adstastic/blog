@@ -32,7 +32,7 @@ This tutorial covers setting up OpenCode with LM Studio for local inference on a
 - Test it works - copy the URL shown in `Reachable at` and curl `/v1/models`
 {{< video src="/assets/lms-list-models.mp4" alt="curl API to list models" >}}
 
-#### Fix qwen3-coder tool calling format
+### Fix qwen3-coder tool calling format
 
 `qwen3-coder` with LMStudio's default system prompt template outputs tool calls as XML while OpenCode expects JSON. 
 This isn't an issue with `gpt-oss` as it uses the new JSON-based [Harmony](https://github.com/openai/harmony) format.
@@ -102,7 +102,7 @@ Here's an example of the memory usage on my Mac Mini with loading and chatting w
 
 {{< video src="/assets/gpt-oss-20b-inference.mp4" alt="gpt-oss-20b inference" >}} 
 
-#### `llm`
+### `llm`
 
 [llm](https://github.com/simonw/llm) is a fantastic tool with a rich plugin ecosystem that makes running simple prompts like this effortless. Here's a quick guide to setting it up with LM Studio:
 
