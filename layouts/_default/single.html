@@ -14,7 +14,7 @@
             </span>{{ if .Params.tags }}
             <span class="tags" itemprop="tags">
                 {{ range .Params.tags }}
-                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">#{{ . }}</a>
+                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">#{{ . | urlize }}</a>
                 {{ end }}
             </span>{{ end }}
         </p>

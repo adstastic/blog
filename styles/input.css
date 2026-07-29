@@ -163,6 +163,11 @@
         padding: 0.125rem 0.25rem;
         background-color: var(--bg-secondary);
         color: var(--text-primary);
+        /* When an inline chip wraps, render padding and background on BOTH
+           fragments instead of one broken rectangle. Preferred over nowrap
+           here because inline code can be long enough to overflow at 390px. */
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
     }
 
     pre {
@@ -392,13 +397,17 @@
         @apply text-[var(--text-secondary)];
     }
 
+    /* inline-block + nowrap makes a chip atomic: it wraps to the next line
+       whole instead of splitting its background across two rectangles. */
     .post-meta .tags a,
     .post-meta .tags a:visited {
-        @apply bg-[var(--bg-secondary)] px-2 py-[0.1rem];
+        @apply inline-block whitespace-nowrap bg-[var(--bg-secondary)] px-2 py-[0.1rem];
     }
 
+    /* gap owns the spacing. It previously came from the newlines between the
+       anchors in the template, which is why the gaps were uneven. */
     .post-meta .tags {
-        @apply inline;
+        @apply inline-flex flex-wrap gap-x-[0.4rem] gap-y-1 align-top;
     }
 
     /* Post content */
