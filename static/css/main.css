@@ -402,8 +402,8 @@ article.post { margin-bottom: var(--space-8); }
   .post-date { font-size: var(--text-xs); }
   .post-meta { display: flex; flex-direction: column; gap: var(--space-1); }
   .post-meta .tags { display: flex; width: 100%; }
-  /* full-bleed code and quotes. .highlight owns its own padding, so it is
-     handled separately — the two used to conflict across cascade layers. */
+  /* full-bleed code and quotes: negate exactly --pad, whichever breakpoint
+     set it. A hard-coded value here overflowed the page by 4px at 390. */
   pre:not(.chroma), blockquote, .highlight {
     margin-inline: calc(var(--pad) * -1);
     border-radius: 0;

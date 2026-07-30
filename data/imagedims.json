@@ -1,0 +1,222 @@
+{
+"/assets/ascii-star-wars.gif": {
+"h": 390,
+"w": 640
+},
+"/assets/cap-iknow.gif": {
+"h": 360,
+"w": 640
+},
+"/assets/cc-remote.jpeg": {
+"h": 1600,
+"w": 738
+},
+"/assets/claude-code-background-tasks.png": {
+"h": 666,
+"w": 1794
+},
+"/assets/claude-custom-commit-command.png": {
+"h": 568,
+"w": 1358
+},
+"/assets/go-grok-yourself.jpeg": {
+"h": 1200,
+"w": 737
+},
+"/assets/gpt-oss-20b-variants.png": {
+"h": 841,
+"w": 1400
+},
+"/assets/lms-developer.png": {
+"h": 64,
+"w": 648
+},
+"/assets/lms-runtime.png": {
+"h": 841,
+"w": 1400
+},
+"/assets/pi-hole-admin.png": {
+"h": 793,
+"w": 1400
+},
+"/assets/plan-mode.gif": {
+"h": 89,
+"w": 720
+},
+"/assets/qwen3-coder-30b-bad-tool-call.png": {
+"h": 259,
+"w": 1299
+},
+"/assets/qwen3-coder-30b-variants.png": {
+"h": 1648,
+"w": 1328
+},
+"/assets/qwq-kidding.jpeg": {
+"h": 188,
+"w": 1280
+},
+"/assets/qwq-modal-bill.png": {
+"h": 726,
+"w": 1168
+},
+"/assets/rpi-imager.gif": {
+"h": 419,
+"w": 640
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎001.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎003.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎004.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎005.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎006.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎007.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎008.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎009.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎010.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎011.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎012.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎013.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎014.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎015.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎016.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎017.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎018.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎019.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎020.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎021.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎022.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎023.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎024.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎025.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎026.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎027.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎028.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎029.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎030.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎031.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎032.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎033.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎034.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎035.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎036.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎037.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/the-weird-intern-in-your-terminal/‎the-weird-intern-in-your-terminal.‎038.jpeg": {
+"h": 1080,
+"w": 1920
+},
+"/assets/touchid.png": {
+"h": 550,
+"w": 1110
+},
+"/assets/videos-broken-whatsapp-screenshot.png": {
+"h": 874,
+"w": 1454
+}
+}
