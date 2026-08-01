@@ -47,7 +47,7 @@
          closing </blockquote>. An excerpt equal to the whole post has nothing
          to continue to, so it gets no link. */}}
     {{ if ne $ex (printf "%s" .Content) }}
-      {{ $tail := printf `<a href="%s" class="feed-tail">&hellip; %d min &rarr;</a>` .Permalink .ReadingTime }}
+      {{ $tail := printf `<a href="%s" class="feed-tail">%d min &rarr;</a>` .Permalink .ReadingTime }}
       {{ $ex = replaceRE `</p>(\s*(?:</blockquote>)?\s*)$` (printf ` %s</p>${1}` $tail) $ex }}
     {{ end }}
     {{ $ex | safeHTML }}

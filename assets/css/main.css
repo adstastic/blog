@@ -301,10 +301,11 @@ nav a:hover { color: var(--link); text-decoration: underline; }
    arrives as a phone-sized thumbnail with nothing cut out of the middle. */
 .feed-item img { max-height: 420px; width: auto; }
 
-/* Inline continue link, sitting at the end of the excerpt's last block rather
-   than on its own row. em-relative so it tracks whatever block it lands in,
-   and nowrap so "… 5 min →" never breaks across a line. */
-.feed-tail { font-family: var(--font-mono); font-size: 0.8em; white-space: nowrap; }
+/* Inline continue link, at the end of the excerpt's last block rather than on
+   its own row. It inherits the body font and size on purpose: at 0.8em mono it
+   read as apparatus, which is the same mistake the old footer made. nowrap
+   keeps "5 min →" from breaking across a line. */
+.feed-tail { white-space: nowrap; }
 
 .feed-foot {
   font-family: var(--font-mono);
