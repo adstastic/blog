@@ -87,10 +87,14 @@ a:hover { text-decoration: underline; }
 /* Prose links carry a non-colour cue: the link colour sits at only ~1.5:1
    against body text, so colour alone cannot distinguish them (WCAG 1.4.1).
    .anchor is the heading permalink glyph, not prose. */
-.post-content a:not(.anchor), blockquote a, .copyright a {
+.post-content a:not(.anchor), blockquote a, .copyright a,
+.feed-item a:not(.feed-title a):not(.feed-more a) {
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
+/* the title and the "continue reading" line are their own affordances */
+.feed-title a, .feed-more a { text-decoration: none; }
+.feed-more a { text-decoration: underline; }
 
 /* :focus-visible, not :focus, so mouse clicks don't draw rings. Ink-coloured:
    an accent ring reads as a stray browser artifact rather than design. */
@@ -258,6 +262,44 @@ nav a:hover { color: var(--link); text-decoration: underline; }
   color: var(--text-2);
   align-self: center;
   line-height: 1;
+}
+
+/* ── front-page feed ───────────────────────────────────────────────────────
+   A window of recent items, read by scrolling. No type label: a quote's body
+   opens "Quoting <author>:" and shows a blockquote, which says it already. */
+.feed-day {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--bg-panel);
+  padding-bottom: var(--space-1);
+  margin: var(--space-8) 0 var(--space-4);
+}
+.feed-day:first-of-type { margin-top: var(--space-6); }
+
+.feed-item { margin-bottom: var(--space-6); }
+.feed-item > :last-child { margin-bottom: 0; }
+
+.feed-title {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0 0 var(--space-2);
+}
+.feed-title a { color: var(--text); text-decoration: none; }
+.feed-title a:hover { color: var(--link); text-decoration: underline; }
+
+.feed-more { font-family: var(--font-mono); font-size: var(--text-sm); }
+.feed-len { color: var(--text-2); }
+
+.feed-foot {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--space-4);
+  margin-top: var(--space-8);
 }
 
 article.post { margin-bottom: var(--space-8); }
@@ -434,6 +476,10 @@ article.post { margin-bottom: var(--space-8); }
 }
 
 @media (max-width: 600px) {
+  /* Adding a fourth nav item pushed the header past the viewport at 390px.
+     Stack it: masthead on one line, nav under it. */
+  .site-header { flex-wrap: wrap; row-gap: var(--space-2); }
+  nav { width: 100%; justify-content: flex-start; }
   .post-list > li { flex-direction: column; align-items: flex-start; gap: var(--space-1); }
   .post-title-container { width: 100%; }
   .post-date { font-size: var(--text-xs); }

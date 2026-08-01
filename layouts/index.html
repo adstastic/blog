@@ -1,28 +1,41 @@
 {{ define "main" }}
-<section class="site-header">
-    {{ partial "masthead.html" . }}
-    {{ partial "nav.html" . }}
+{{ partial "masthead-row.html" . }}
+
+{{/* Front page is a window of recent items, not a page of a pager. Every blog
+     surveyed (Willison, Daring Fireball, jvns, kottke) shows a recent window
+     and puts the rest behind one archive link. A window beats a count here
+     because posting is bursty: 30 items could be a week or eight months.
+     The floor stops the page going empty during a gap. */}}
+{{ $all := union (where .Site.RegularPages "Section" "posts") (where .Site.RegularPages "Section" "quotes") }}
+{{ $all = $all.ByDate.Reverse }}
+{{ $cutoff := now.AddDate 0 0 -30 }}
+{{ $window := where $all "Date" "ge" $cutoff }}
+{{ if lt (len $window) 15 }}{{ $window = first 15 $all }}{{ end }}
+
+<section class="feed">
+  {{ range $window.GroupByDate "Jan 02, 2006" }}
+  <h2 class="feed-day">{{ .Key }}</h2>
+  {{ range .Pages }}
+  <article class="feed-item">
+    <h3 class="feed-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+    {{ if eq .Section "quotes" }}
+      {{/* Quotes render in full: they are short, and the body opens
+           "Quoting <author>:", which identifies the type without a label. */}}
+      {{ .Content }}
+    {{ else }}
+      {{/* First paragraph only. .Summary returns the first ~70 words of
+           RENDERED html, so it drags in headings and images: the front page
+           showed "##Why" in the body font and a full slide image. */}}
+      {{ with findRE "(?s)<p>.*?</p>" .Content 1 }}{{ index . 0 | safeHTML }}{{ end }}
+      <p class="feed-more"><a href="{{ .Permalink }}">Continue reading &rarr;</a>
+        <span class="feed-len">{{ .ReadingTime }} min</span></p>
+    {{ end }}
+  </article>
+  {{ end }}
+  {{ end }}
 </section>
 
+<p class="feed-foot"><a href="/archive/">All {{ len $all }} posts and quotes in the archive &rarr;</a></p>
 
-<section class="home">
-    <ul class="post-list">
-        {{ $allPages := union (where .Site.RegularPages "Section" "posts") (where .Site.RegularPages "Section" "quotes") }}
-        {{ range $allPages.ByDate.Reverse }}
-        <li>
-            <div class="post-title-container">
-                {{/* markdown syntax as the type marker: # is a heading (post), > is a blockquote (quote) */}}
-                <span class="type-marker" aria-hidden="true">{{ if eq .Section "quotes" }}&gt;{{ else }}#{{ end }}</span>
-                <a href="{{ .Permalink }}" class="post-title-link"><span class="post-title-text">{{ .Title }}</span></a>
-            </div>
-            <time datetime="{{ .Date.Format "2006-01-02" }}" class="post-date">{{ .Date.Format "Jan 02, 2006" }}</time>
-        </li>
-        {{ end }}
-    </ul>
-</section>
-
-<hr>
-<div class="copyright">
-    <p>&copy; {{ now.Year }} {{ .Site.Params.author }}. <a href="/credits">Credits</a>.</p>
-</div>
+{{ partial "footer.html" . }}
 {{ end }}
