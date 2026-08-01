@@ -209,23 +209,35 @@ nav a:hover { color: var(--link); text-decoration: underline; }
 /* Every row reserves the same left gutter, so quote and post titles share one
    left edge. The quote glyph sits in that gutter instead of pushing its own
    title right, which is what made the index left edge ragged. */
+/* A two-column grid with baseline alignment, not absolute positioning: the
+   marker and the title then share a baseline by definition. Absolute
+   positioning aligned the marker BOX to the container top, which put the mono
+   glyph 5px above the serif title's baseline. */
 .post-title-container {
   flex: 1;
   min-width: 0;
-  position: relative;
-  padding-left: var(--space-6);
+  display: grid;
+  grid-template-columns: var(--space-6) 1fr;
+  align-items: baseline;
 }
 /* One line per row on the index. Quote titles are the quote text, so they run
    long: median 32 characters but p90 71 and one at 213. Wrapping them made
    rows two to four lines tall and buried the short entries. */
 .post-title-link {
   display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  min-width: 0;
   font-weight: 400;
   color: var(--text);
   text-decoration: none;
+}
+/* The clipping lives on the inner span, not the link. overflow other than
+   visible makes a box baseline-opaque — its baseline becomes the bottom edge —
+   so clipping the link left the grid nothing real to baseline-align. */
+.post-title-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .post-title-link:hover { color: var(--link); text-decoration: underline; }
 .post-date {
@@ -237,13 +249,15 @@ nav a:hover { color: var(--link); text-decoration: underline; }
 /* Both content types carry a marker, so the gutter is never half empty. The
    glyphs are the markdown that produces each type: # is a heading (post),
    > is a blockquote (quote). Same idea as the #/## markers on headings. */
+/* Centred on the line, not baseline-aligned. '#' sits on the baseline but '>'
+   is centred on the font's math axis, so baseline alignment makes the two
+   markers look wrong relative to each other. Optical centring makes both
+   consistent. */
 .type-marker {
-  position: absolute;
-  left: 0;
-  top: 0;
   font-family: var(--font-mono);
   color: var(--text-2);
-  line-height: inherit;
+  align-self: center;
+  line-height: 1;
 }
 
 article.post { margin-bottom: var(--space-8); }
