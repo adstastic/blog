@@ -1,0 +1,496 @@
+/* ~/adi — hand-written. No build step, no framework. See CLAUDE.md before editing.
+   Sections: 1 tokens · 2 reset · 3 elements · 4 components · 5 syntax · 6 responsive
+   Rule: outside section 1, every colour is a var(). Run ./contrast.py before commit. */
+
+/* ── 1. TOKENS ─────────────────────────────────────────────────────────────
+   Solarized palette appears on the right-hand side ONLY. Sections 2-6 use the
+   role tokens, never the palette names — a palette colour used directly is one
+   that will be wrong in one of the two themes without anyone noticing.
+   Every fg/bg pair below clears WCAG AA (4.5:1); contrast.py asserts it. */
+:root {
+  color-scheme: light;
+
+  /* palette (Solarized) */
+  --base03: #002b36;  --base02: #073642;  --base01: #586e75;  --base00: #657b83;
+  --base0:  #839496;  --base1:  #93a1a1;  --base2:  #eee8d5;  --base3:  #fdf6e3;
+  --yellow: #b58900;  --orange: #cb4b16;  --red:    #dc322f;  --magenta: #d33682;
+  --violet: #6c71c4;  --blue:   #268bd2;  --cyan:   #2aa198;  --green:   #859900;
+
+  /* roles — light */
+  --bg:         var(--base3);
+  --bg-panel:   var(--base2);
+  --text:       var(--base02);  /* 12.05 on bg · 10.61 on panel */
+  /* base01 itself is 4.99 on bg but only 4.39 on panel, and tag chips sit on
+     the panel. −3% L clears both; the shift is not perceptible. */
+  --text-2:     #556b71;        /*  5.22 on bg ·  4.60 on panel */
+  --rule:       var(--base1);
+  --link:       #1e6da5;        /*  5.14 on bg ·  4.53 on panel — Solarized blue, −10% L */
+  --link-hover: var(--base02);
+  --focus:      var(--text);
+  /* code comments may sit below 4.5: inside a code block dimness encodes
+     "subordinate", and it is not prose. Documented exception, excluded from
+     contrast.py. */
+  --code-dim:   var(--base1);
+
+  --font-body: Literata, Georgia, serif;
+  --font-mono: "Ubuntu Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs: 0.75rem;  --text-sm: 0.875rem;  --text-base: 1.125rem;
+  --text-md: 1.25rem;  --text-lg: 1.3rem;    --text-xl: 1.5rem;  --text-2xl: 2.125rem;
+
+  --space-1: 0.25rem;  --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;     --space-6: 1.5rem;  --space-8: 2rem;
+
+  --measure: 42rem;
+  --radius: 3px;
+}
+
+.dark, .dark-theme {
+  color-scheme: dark;
+  --bg:         var(--base03);
+  --bg-panel:   var(--base02);
+  --text:       var(--base2);   /* 12.25 on bg · 10.61 on panel */
+  --text-2:     var(--base1);   /*  5.61 on bg ·  4.86 on panel */
+  --rule:       var(--base01);
+  --link:       #469fde;        /*  5.20 on bg ·  4.50 on panel */
+  --link-hover: var(--base3);
+  --focus:      var(--text);
+  --code-dim:   var(--base01);
+}
+
+/* ── 2. RESET ──────────────────────────────────────────────────────────────
+   Replaces Tailwind preflight (148 generated lines). The old stylesheet had no
+   box-sizing and no margin reset of its own and relied entirely on it. */
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, pre { margin: 0; }
+img, video { display: block; max-width: 100%; height: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+/* ── 3. ELEMENTS ───────────────────────────────────────────────────────────*/
+html { background-color: var(--bg); }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.62;
+  color: var(--text);
+  background-color: var(--bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 { font-weight: 700; margin-bottom: var(--space-4); }
+p, ul, ol, dl, blockquote, pre, table, figure { margin-bottom: var(--space-4); }
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Prose links carry a non-colour cue: the link colour sits at only ~1.5:1
+   against body text, so colour alone cannot distinguish them (WCAG 1.4.1).
+   .anchor is the heading permalink glyph, not prose. */
+.post-content a:not(.anchor), blockquote a, .copyright a,
+.feed-item a:not(.feed-title a) {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+/* the title is its own affordance */
+.feed-title a { text-decoration: none; }
+
+/* :focus-visible, not :focus, so mouse clicks don't draw rings. Ink-coloured:
+   an accent ring reads as a stray browser artifact rather than design. */
+:where(a, button, input):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Indent with padding, not margin: the marker lives in the padding, so the
+   UA's own padding-inline-start would stack on top of a margin and double it. */
+ul, ol { margin-left: 0; padding-left: var(--space-6); }
+ul { list-style: disc; }
+ol { list-style: decimal; }
+li > ul, li > ol { margin-bottom: 0; }
+
+code, pre { font-family: var(--font-mono); }
+
+code {
+  padding: 0.125rem var(--space-1);
+  background-color: var(--bg-panel);
+  color: var(--text);
+  /* both fragments of a wrapped chip get padding and background, instead of
+     one rectangle sliced in half. Preferred over nowrap because inline code
+     can be long enough to overflow at 390px. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  /* A path like ~/.config/opencode/opencode.json has no spaces, so it cannot
+     wrap and overflowed a 320px viewport. box-decoration-break above makes
+     each fragment render as a complete chip. */
+  overflow-wrap: anywhere;
+}
+
+pre {
+  padding: var(--space-2) var(--space-3);
+  overflow-x: auto;
+  border: 1px solid var(--bg-panel);
+  background-color: var(--bg-panel);
+  border-radius: var(--radius);
+}
+pre > code { padding: 0; background-color: transparent; }
+
+blockquote {
+  color: var(--text);
+  background-color: var(--bg-panel);
+  border-left: 4px solid var(--link);
+  padding: var(--space-4);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+blockquote > :last-child { margin-bottom: 0; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: var(--space-2) var(--space-3); text-align: left; }
+th { vertical-align: bottom; border-bottom: 2px solid var(--rule); }
+td { border-bottom: 1px solid var(--bg-panel); }
+
+hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; }
+
+/* ── 4. COMPONENTS ─────────────────────────────────────────────────────────*/
+.page-content {
+  position: relative;
+  width: 100%;
+  max-width: var(--measure);
+  margin-inline: auto;
+  /* --pad owns the horizontal padding so full-bleed children can negate
+     exactly it. Hard-coding the bleed overflowed by 4px at 390px, where the
+     padding is smaller than the bleed was. */
+  --pad: var(--space-6);
+  padding: var(--space-8) var(--pad);
+}
+
+/* The rule belongs to the header it terminates. 12/12 is deliberate: the
+   content side reads with more air because the title's ascent adds ~17px of
+   invisible space, and across a chrome/content boundary that is wanted. */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  min-width: 0;
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* masthead: dim prompt, bold name. Not an inverted chip — a filled block
+   reads as a UI badge against a serif body. */
+.smallcap { margin: 0; flex-shrink: 0; font-size: var(--text-xl); }
+.smallcap a {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.smallcap a:hover { color: var(--link); text-decoration: none; }
+.smallcap .prompt { color: var(--text-2); font-weight: 400; }
+
+nav {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+nav a { color: var(--text-2); text-decoration: none; }
+nav a:hover { color: var(--link); text-decoration: underline; }
+
+.home section + section { margin-top: var(--space-8); }
+
+.post-list { list-style: none; margin-left: 0; padding-left: 0; }
+.post-list > li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+/* Every row reserves the same left gutter, so quote and post titles share one
+   left edge. The quote glyph sits in that gutter instead of pushing its own
+   title right, which is what made the index left edge ragged. */
+/* A two-column grid with baseline alignment, not absolute positioning: the
+   marker and the title then share a baseline by definition. Absolute
+   positioning aligned the marker BOX to the container top, which put the mono
+   glyph 5px above the serif title's baseline. */
+.post-title-container {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: var(--space-6) 1fr;
+  align-items: baseline;
+}
+/* One line per row on the index. Quote titles are the quote text, so they run
+   long: median 32 characters but p90 71 and one at 213. Wrapping them made
+   rows two to four lines tall and buried the short entries. */
+.post-title-link {
+  display: block;
+  min-width: 0;
+  font-weight: 400;
+  color: var(--text);
+  text-decoration: none;
+}
+/* The clipping lives on the inner span, not the link. overflow other than
+   visible makes a box baseline-opaque — its baseline becomes the bottom edge —
+   so clipping the link left the grid nothing real to baseline-align. */
+.post-title-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.post-title-link:hover { color: var(--link); text-decoration: underline; }
+.post-date {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-2);
+}
+/* Both content types carry a marker, so the gutter is never half empty. The
+   glyphs are the markdown that produces each type: # is a heading (post),
+   > is a blockquote (quote). Same idea as the #/## markers on headings. */
+/* Centred on the line, not baseline-aligned. '#' sits on the baseline but '>'
+   is centred on the font's math axis, so baseline alignment makes the two
+   markers look wrong relative to each other. Optical centring makes both
+   consistent. */
+.type-marker {
+  font-family: var(--font-mono);
+  color: var(--text-2);
+  align-self: center;
+  line-height: 1;
+}
+
+/* ── front-page feed ───────────────────────────────────────────────────────
+   A window of recent items, read by scrolling. No type label: a quote's body
+   opens "Quoting <author>:" and shows a blockquote, which says it already. */
+.feed-day {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--bg-panel);
+  padding-bottom: var(--space-1);
+  margin: var(--space-8) 0 var(--space-4);
+}
+.feed-day:first-of-type { margin-top: var(--space-6); }
+
+.feed-item { margin-bottom: var(--space-6); }
+.feed-item > :last-child { margin-bottom: 0; }
+
+.feed-title {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.28;
+  margin: 0 0 var(--space-2);
+}
+.feed-title a { color: var(--text); text-decoration: none; }
+.feed-title a:hover { color: var(--link); text-decoration: underline; }
+
+/* Heavier in dark mode, to land at the same APPARENT weight. Title and body
+   are the same colour (12.05:1 light, 12.25:1 dark), so the whole separation
+   rests on 600 against 400 — and light glyphs on a dark field bloom, which
+   adds apparent weight to the body and closes that gap. Matching the numbers
+   across modes is what makes them look different. In-post headings are
+   exempt: mono at 700 already separates on family. */
+.dark .feed-title, .dark-theme .feed-title { font-weight: 700; }
+
+/* Images stay in the excerpt: a screenshot is a better hook than its caption.
+   The cap only catches portraits. At the 624px column, 16 of 19 images render
+   under 420px, but three phone-shaped ones reach 774-1353px and would own the
+   whole feed. width:auto shrinks instead of cropping, so a tall screenshot
+   arrives as a phone-sized thumbnail with nothing cut out of the middle. */
+.feed-item img { max-height: 420px; width: auto; }
+
+/* Inline continue link, at the end of the excerpt's last block rather than on
+   its own row. It inherits the body font and size on purpose: at 0.8em mono it
+   read as apparatus, which is the same mistake the old footer made. nowrap
+   keeps "5 min →" from breaking across a line. */
+.feed-tail { white-space: nowrap; }
+
+.feed-foot {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+article.post { margin-bottom: var(--space-8); }
+.post-header { margin-bottom: var(--space-4); }
+.post-title {
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+  margin: var(--space-3) 0;
+}
+.post-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-2);
+  margin-bottom: var(--space-3);
+}
+.post-meta a, .post-meta a:visited { color: var(--text-2); }
+/* gap owns the spacing; it previously came from the newlines between anchors
+   in the template, which is why the gaps were uneven. inline-block + nowrap
+   makes a chip atomic so it wraps whole. */
+.post-meta .tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) 0.4rem;
+  vertical-align: top;
+}
+.post-meta .tags a, .post-meta .tags a:visited {
+  display: inline-block;
+  white-space: nowrap;
+  background-color: var(--bg-panel);
+  padding: 0.1rem var(--space-2);
+  border-radius: var(--radius);
+}
+
+.post-content { margin-bottom: var(--space-8); }
+.post-content h1, .post-content h2, .post-content h3,
+.post-content h4, .post-content h5, .post-content h6 {
+  position: relative;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  margin-top: var(--space-8);
+}
+.post-content :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: var(--space-4);
+}
+.post-content h1 { font-size: var(--text-xl); }
+.post-content h2 { font-size: var(--text-lg); }
+.post-content h3 { font-size: var(--text-md); }
+.post-content h4, .post-content h5, .post-content h6 { font-size: var(--text-base); }
+
+/* the depth marker IS the permalink — always visible, always focusable */
+.post-content .anchor {
+  font-weight: 400;
+  /* --text-2, not --rule: this is persistent visible text now, not a
+     decorative hover glyph, so it has to clear AA (rule is 2.48:1) */
+  color: var(--text-2);
+  text-decoration: none;
+  margin-right: 0.5em;
+}
+.post-content .anchor:hover { color: var(--link); text-decoration: underline; }
+
+.related-posts {
+  margin-block: var(--space-8);
+  padding: var(--space-6);
+  background-color: var(--bg-panel);
+  border-radius: var(--radius);
+}
+.related-posts h2 {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  margin-top: 0;
+}
+.related-posts ul { list-style: none; margin-left: 0; padding-left: 0; margin-bottom: 0; }
+.related-posts li { margin-bottom: var(--space-1); }
+.related-posts a { color: var(--text); text-decoration: none; }
+.related-posts a:hover { color: var(--link); text-decoration: underline; }
+
+/* was used in terms.html/term.html and defined nowhere, so "All Tags"
+   rendered as ordinary body copy */
+.site-intro { font-family: var(--font-mono); font-size: var(--text-md); color: var(--text-2); }
+.tag-list { list-style: none; margin-left: 0; padding-left: 0; }
+.tag-list li { margin-bottom: var(--space-1); }
+.tag-count { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-2); }
+
+.copyright {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-2);
+}
+.copyright a, .copyright a:visited { color: var(--text-2); }
+
+/* Theme toggle: one icon button, three states. Only the icon for the current
+   state is shown. Deliberately conventional — custom widgets (split pill,
+   segmented control, three-stop track) all read as UI dropped into a text nav. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border: 0;
+  background: none;
+  color: var(--text-2);
+  cursor: pointer;
+  line-height: 1;
+}
+.theme-toggle:hover { color: var(--link); }
+.theme-toggle .ic { display: none; width: 1.05rem; height: 1.05rem; }
+.theme-toggle[data-theme-state="system"] .ic-system,
+.theme-toggle[data-theme-state="light"]  .ic-light,
+.theme-toggle[data-theme-state="dark"]   .ic-dark { display: block; }
+
+/* ── 5. SYNTAX (Chroma) ────────────────────────────────────────────────────
+   Grouped by role: 66 single-property rules collapsed to 9 colour groups.
+   To change syntax colours change the role tokens, or regenerate with
+   `hugo gen chromastyles`. Do not hand-edit individual .chroma classes. */
+.highlight {
+  margin-block: var(--space-4);
+  padding: var(--space-4);
+  overflow-x: auto;
+  background-color: var(--bg-panel);
+  border-radius: var(--radius);
+  color: var(--text);
+}
+.highlight pre { margin: 0; border: 0; padding: 0; background-color: transparent; }
+
+.chroma .err, .chroma .kt, .chroma .sr, .chroma .gd, .chroma .gr { color: var(--red); }
+.chroma .k, .chroma .kn, .chroma .kp, .chroma .o, .chroma .ow,
+.chroma .cs, .chroma .cp, .chroma .cpf, .chroma .gi { color: var(--green); }
+.chroma .kc, .chroma .no, .chroma .ni, .chroma .ne, .chroma .se,
+.chroma .gh, .chroma .gu { color: var(--orange); }
+.chroma .kd, .chroma .kr, .chroma .nc, .chroma .nd, .chroma .nf,
+.chroma .nt, .chroma .nv { color: var(--blue); }
+.chroma .n, .chroma .na, .chroma .nl, .chroma .nn, .chroma .nx, .chroma .sd,
+.chroma .sh, .chroma .p, .chroma .go, .chroma .gp, .chroma .gt { color: var(--text-2); }
+.chroma .nb { color: var(--yellow); }
+.chroma .s, .chroma .sa, .chroma .sc, .chroma .dl, .chroma .s2, .chroma .si,
+.chroma .sx, .chroma .s1, .chroma .ss, .chroma .m, .chroma .mb, .chroma .mf,
+.chroma .mh, .chroma .mi, .chroma .il, .chroma .mo { color: var(--cyan); }
+.chroma .sb, .chroma .c, .chroma .ch, .chroma .cm, .chroma .c1 { color: var(--code-dim); }
+.chroma .ge { color: var(--text-2); font-style: italic; }
+.chroma .gs { font-weight: 700; }
+.chroma .lntable { display: block; width: auto; margin: 0; padding: 0; border: 0; }
+.chroma .lntd { margin: 0; padding: 0; border: 0; vertical-align: top; }
+.chroma .ln { margin-right: 0.4em; padding-inline: 0.4em; color: var(--code-dim); }
+
+/* ── 6. RESPONSIVE ─────────────────────────────────────────────────────────
+   Three breakpoints, and only three. */
+@media (max-width: 768px) {
+  .page-content { --pad: var(--space-4); padding: var(--space-6) var(--pad); }
+  .post-title   { font-size: var(--text-xl); }
+}
+
+@media (max-width: 600px) {
+  .post-list > li { flex-direction: column; align-items: flex-start; gap: var(--space-1); }
+  .post-title-container { width: 100%; }
+  .post-date { font-size: var(--text-xs); }
+  .post-meta { display: flex; flex-direction: column; gap: var(--space-1); }
+  .post-meta .tags { display: flex; width: 100%; }
+  /* full-bleed code and quotes: negate exactly --pad, whichever breakpoint
+     set it. A hard-coded value here overflowed the page by 4px at 390. */
+  pre:not(.chroma), blockquote, .highlight {
+    margin-inline: calc(var(--pad) * -1);
+    border-radius: 0;
+  }
+  .smallcap { font-size: var(--text-md); }
+}
+
+@media (max-width: 400px) {
+  .page-content { --pad: var(--space-3); padding: var(--space-4) var(--pad); }
+  .smallcap { font-size: var(--text-base); }
+  nav { gap: var(--space-2); }
+}

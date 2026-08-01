@@ -8,6 +8,12 @@ title = '~/adi'
 # Must stay above the first [table] header or TOML scopes it into that table.
 disableKinds = ['section']
 
+# Fall back to the date in the filename. Hugo's default is
+# ["date", "publishDate", "lastmod"], so a file with no date: front matter got
+# the zero value and rendered as "Jan 01, 0001" instead of failing.
+[frontmatter]
+  date = ['date', ':filename', 'publishDate', 'lastmod']
+
 # Enable emoji support
 enableEmoji = true
 

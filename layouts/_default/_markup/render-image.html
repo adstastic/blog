@@ -1,0 +1,15 @@
+{{- /* Lazy-load images below the first one: /p/tai-talk/ embeds 37 slides
+     totalling 5.7MB and fetched every one eagerly. The first stays eager so it
+     can still serve as the LCP element.
+
+     width/height come from data/imagedims.json because Hugo cannot read the
+     intrinsic size of files under static/. Without them lazy loading costs
+     CLS 0.15 as each image arrives; with them the box is reserved up front.
+     Regenerate after adding images: uv run scripts/image-dims.py */ -}}
+{{- $src := .Destination -}}
+{{- $dim := index site.Data.imagedims $src -}}
+<img src="{{ $src | safeURL }}" alt="{{ .Text }}"
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- with $dim }} width="{{ .w }}" height="{{ .h }}"{{ end }}
+  {{- if eq .Ordinal 0 }} loading="eager" fetchpriority="high"
+  {{- else }} loading="lazy" decoding="async"{{ end }}>

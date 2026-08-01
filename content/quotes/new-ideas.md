@@ -1,5 +1,5 @@
 ---
-title: "Cultivating a state of mind where new ideas are born Cultivating a state of mind where new ideas are born"
+title: "Cultivating a state of mind where new ideas are born"
 date: 2025-02-08
 slug: "new-ideas"
 tags:

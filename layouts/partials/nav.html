@@ -1,10 +1,9 @@
 <nav>
+    <a href="/archive/">Archive</a>
+    <span>/</span>
     <a href="/about">About</a>
     <span>/</span>
     <a href="/feed.xml">RSS</a>
     <span>/</span>
-    <label class="toggle-switch" for="dark-mode-toggle">
-        <input type="checkbox" id="dark-mode-toggle" class="toggle-input" aria-label="Dark mode">
-        <span class="toggle-slider"></span>
-    </label>
+    {{ partial "theme-toggle.html" . }}
 </nav>

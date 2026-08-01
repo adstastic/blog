@@ -1,16 +1,14 @@
 {{ define "main" }}
 <section class="site-header">
-    {{ partial "masthead.html" . }}
-    {{ partial "nav.html" . }}
+  {{ partial "masthead.html" . }}
+  {{ partial "nav.html" . }}
 </section>
 
-<section class="site-intro">
-    <p>Posts tagged "{{ .Title }}"</p>
-</section>
 
 <section class="home">
     <ul class="post-list">
-        {{ range .Pages }}
+        {{ $allPages := union (where .Site.RegularPages "Section" "posts") (where .Site.RegularPages "Section" "quotes") }}
+        {{ range $allPages.ByDate.Reverse }}
         <li>
             <div class="post-title-container">
                 {{/* markdown syntax as the type marker: # is a heading (post), > is a blockquote (quote) */}}
@@ -21,8 +19,6 @@
         </li>
         {{ end }}
     </ul>
-    
-    <p><a href="/">&larr; Back to all posts</a></p>
 </section>
 
 <hr>
