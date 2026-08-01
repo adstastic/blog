@@ -295,6 +295,13 @@ nav a:hover { color: var(--link); text-decoration: underline; }
 .feed-title a { color: var(--text); text-decoration: none; }
 .feed-title a:hover { color: var(--link); text-decoration: underline; }
 
+/* Images stay in the excerpt: a screenshot is a better hook than its caption.
+   The cap only catches portraits. At the 624px column, 16 of 19 images render
+   under 420px, but three phone-shaped ones reach 774-1353px and would own the
+   whole feed. width:auto shrinks instead of cropping, so a tall screenshot
+   arrives as a phone-sized thumbnail with nothing cut out of the middle. */
+.feed-item img { max-height: 420px; width: auto; }
+
 .feed-more { font-family: var(--font-mono); font-size: var(--text-sm); }
 .feed-len { color: var(--text-2); }
 
