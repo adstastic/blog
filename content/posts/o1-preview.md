@@ -8,7 +8,7 @@ tags:
   - project
 ---
 
-**tl;dr** I used OpenAI's `o1-preview` model to code a web app that uses `gpt-4o-mini` to generate simple mental maths rules for converting between currencies. If you have an OpenAI API key, go [check it out](https://adim.in/mental-forex/)!
+**tl;dr** I used OpenAI's `o1-preview` model to code a web app that uses `gpt-4o-mini` to generate simple mental maths rules for converting between currencies.
 
 ---
 
@@ -22,7 +22,7 @@ I thought about it for a bit and said "Drop the last 3 digits and divide by 5".
 
 OpenAI had just dropped `o1-preview`, so I wondered about using its superior reasoning[^superior] to generate such heuristics. Alas, I don't qualify for API access, so I [argued with 4o-mini](https://platform.openai.com/docs/guides/prompt-engineering) until it made usable rules, and got o1-preview to implement it. 
 
-The result is [Mental Forex](https://adim.in/mental-forex/) - how far my weird intern[^weird-intern] & I got in ~2 hours, when I hit the message cap. You'll need an OpenAI API key[^sus] to use it.
+The result is Mental Forex - how far my weird intern[^weird-intern] & I got in ~2 hours, when I hit the message cap. You'll need an OpenAI API key[^sus] to use it.
 
 I've tried small projects with `claude-3.5-sonnet` or `gpt-4o` before, and this is a significant improvement. My early impressions:
 - hallucination, gaslighting, and loops are much rarer
