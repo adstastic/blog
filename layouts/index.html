@@ -23,6 +23,19 @@
          under the excerpt, 32px above the next date heading, so it read as
          belonging to neither. Willison solves this the same way, ending the
          excerpt with an inline "[... 1,316 words]". */}}
+    {{/* The first paragraph that actually holds something. Taking <p> #1
+         unconditionally left one item as a bare title beside a bare reading
+         time: remote-control-claude-code.md opens with a raw <img> and a
+         literal <p></p> spacer, so the excerpt was the empty paragraph and
+         the failure was silent. A paragraph qualifies on text OR an image, so
+         an image-only opener still gets through as a hook. */}}
+    {{ $first := "" }}
+    {{ range findRE "(?s)<p>.*?</p>" .Content 5 }}
+      {{ if and (eq $first "") (or (ne (strings.TrimSpace (plainify .)) "") (strings.Contains . "<img")) }}
+        {{ $first = . }}
+      {{ end }}
+    {{ end }}
+
     {{ $ex := "" }}
     {{ if eq .Section "quotes" }}
       {{/* Quotes are NOT reliably short: median 175 words, p90 1103, longest
@@ -33,21 +46,24 @@
       {{ if le .WordCount 200 }}
         {{ $ex = printf "%s" .Content }}
       {{ else }}
-        {{ with findRE "(?s)<p>.*?</p>" .Content 1 }}{{ $ex = index . 0 }}{{ end }}
+        {{ $ex = $first }}
         {{ with findRE "(?s)<blockquote>.*?</blockquote>" .Content 1 }}{{ $ex = printf "%s%s" $ex (index . 0) }}{{ end }}
       {{ end }}
     {{ else }}
       {{/* First paragraph only. .Summary returns the first ~70 words of
            RENDERED html, so it drags in headings and images: the front page
            showed "##Why" in the body font and a full slide image. */}}
-      {{ with findRE "(?s)<p>.*?</p>" .Content 1 }}{{ $ex = index . 0 }}{{ end }}
+      {{ $ex = $first }}
     {{ end }}
 
     {{/* Anchor the link to the last </p>, which for a quote sits inside the
          closing </blockquote>. An excerpt equal to the whole post has nothing
          to continue to, so it gets no link. */}}
     {{ if ne $ex (printf "%s" .Content) }}
-      {{ $tail := printf `<a href="%s" class="feed-tail">%d min &rarr;</a>` .Permalink .ReadingTime }}
+      {{/* Bracketed because an excerpt can end on a prose link, and two
+           adjacent underlined runs separated by ". " read as one link. The
+           brackets mark it as apparatus rather than part of the sentence. */}}
+      {{ $tail := printf `<a href="%s" class="feed-tail">[%d min &rarr;]</a>` .Permalink .ReadingTime }}
       {{ $ex = replaceRE `</p>(\s*(?:</blockquote>)?\s*)$` (printf ` %s</p>${1}` $tail) $ex }}
     {{ end }}
     {{ $ex | safeHTML }}
