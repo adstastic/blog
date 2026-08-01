@@ -7,7 +7,7 @@ tags:
   - macOS
 ---
 
-A while back I wrote about using [TouchID to authenticate sudo](/sudo-touchid). I made this change when I was still using Terminal.app and everything worked fine. 
+A while back I wrote about using [TouchID to authenticate sudo](/p/sudo-touchid/). I made this change when I was still using Terminal.app and everything worked fine. 
 
 As we all know, 2020 has been a year full of unexpected changes, the most notable of which is clearly me switching to iTerm2 as my terminal emulator. This broke the TouchID setup I had done earlier and I was back to typing out my password. 
 

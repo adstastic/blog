@@ -5,7 +5,7 @@ tags: [webkit, chromium, web, hugo, markdown, bug, til, blog]
 draft: false
 ---
 
-I just published [a post with gifs and videos](/p/claude-code-setup) and was pretty happy with how it was looking.
+I just published [a post with gifs and videos](/p/my-claude-code-setup/) and was pretty happy with how it was looking.
 A few minutes later, a friend messaged me:
 ![whatsapp screenshot of friend telling me videos are broken](/assets/videos-broken-whatsapp-screenshot.png)
 
