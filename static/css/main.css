@@ -206,9 +206,27 @@ nav a:hover { color: var(--link); text-decoration: underline; }
   gap: var(--space-4);
   margin-bottom: var(--space-2);
 }
-.post-title-container { flex: 1; min-width: 0; }
-/* no nowrap/ellipsis: 8 of 121 titles truncated mid-word even at 1440px */
-.post-title-link { font-weight: 400; color: var(--text); text-decoration: none; }
+/* Every row reserves the same left gutter, so quote and post titles share one
+   left edge. The quote glyph sits in that gutter instead of pushing its own
+   title right, which is what made the index left edge ragged. */
+.post-title-container {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  padding-left: var(--space-6);
+}
+/* One line per row on the index. Quote titles are the quote text, so they run
+   long: median 32 characters but p90 71 and one at 213. Wrapping them made
+   rows two to four lines tall and buried the short entries. */
+.post-title-link {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+  color: var(--text);
+  text-decoration: none;
+}
 .post-title-link:hover { color: var(--link); text-decoration: underline; }
 .post-date {
   flex-shrink: 0;
@@ -216,11 +234,16 @@ nav a:hover { color: var(--link); text-decoration: underline; }
   font-size: var(--text-sm);
   color: var(--text-2);
 }
-.quote-indicator {
-  margin-right: var(--space-1);
-  font-size: var(--text-md);
-  line-height: 1;
+/* Both content types carry a marker, so the gutter is never half empty. The
+   glyphs are the markdown that produces each type: # is a heading (post),
+   > is a blockquote (quote). Same idea as the #/## markers on headings. */
+.type-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-mono);
   color: var(--text-2);
+  line-height: inherit;
 }
 
 article.post { margin-bottom: var(--space-8); }
