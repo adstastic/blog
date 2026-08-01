@@ -294,6 +294,14 @@ nav a:hover { color: var(--link); text-decoration: underline; }
 .feed-title a { color: var(--text); text-decoration: none; }
 .feed-title a:hover { color: var(--link); text-decoration: underline; }
 
+/* Heavier in dark mode, to land at the same APPARENT weight. Title and body
+   are the same colour (12.05:1 light, 12.25:1 dark), so the whole separation
+   rests on 600 against 400 — and light glyphs on a dark field bloom, which
+   adds apparent weight to the body and closes that gap. Matching the numbers
+   across modes is what makes them look different. In-post headings are
+   exempt: mono at 700 already separates on family. */
+.dark .feed-title, .dark-theme .feed-title { font-weight: 700; }
+
 /* Images stay in the excerpt: a screenshot is a better hook than its caption.
    The cap only catches portraits. At the 624px column, 16 of 19 images render
    under 420px, but three phone-shaped ones reach 774-1353px and would own the
