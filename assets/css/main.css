@@ -88,13 +88,12 @@ a:hover { text-decoration: underline; }
    against body text, so colour alone cannot distinguish them (WCAG 1.4.1).
    .anchor is the heading permalink glyph, not prose. */
 .post-content a:not(.anchor), blockquote a, .copyright a,
-.feed-item a:not(.feed-title a):not(.feed-more a) {
+.feed-item a:not(.feed-title a) {
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
-/* the title and the "continue reading" line are their own affordances */
-.feed-title a, .feed-more a { text-decoration: none; }
-.feed-more a { text-decoration: underline; }
+/* the title is its own affordance */
+.feed-title a { text-decoration: none; }
 
 /* :focus-visible, not :focus, so mouse clicks don't draw rings. Ink-coloured:
    an accent ring reads as a stray browser artifact rather than design. */
@@ -302,8 +301,10 @@ nav a:hover { color: var(--link); text-decoration: underline; }
    arrives as a phone-sized thumbnail with nothing cut out of the middle. */
 .feed-item img { max-height: 420px; width: auto; }
 
-.feed-more { font-family: var(--font-mono); font-size: var(--text-sm); }
-.feed-len { color: var(--text-2); }
+/* Inline continue link, sitting at the end of the excerpt's last block rather
+   than on its own row. em-relative so it tracks whatever block it lands in,
+   and nowrap so "… 5 min →" never breaks across a line. */
+.feed-tail { font-family: var(--font-mono); font-size: 0.8em; white-space: nowrap; }
 
 .feed-foot {
   font-family: var(--font-mono);
