@@ -98,7 +98,7 @@ a:hover { text-decoration: underline; }
 
 /* :focus-visible, not :focus, so mouse clicks don't draw rings. Ink-coloured:
    an accent ring reads as a stray browser artifact rather than design. */
-:where(a, button, input, .toggle-slider):focus-visible {
+:where(a, button, input):focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
@@ -397,46 +397,24 @@ article.post { margin-bottom: var(--space-8); }
 }
 .copyright a, .copyright a:visited { color: var(--text-2); }
 
-/* dark-mode toggle. Geometry is scoped to the component, so a breakpoint
-   retunes three variables instead of five rules across four selectors. */
-.toggle-switch {
-  --toggle-w: 2.5rem; --toggle-h: 1.5rem; --knob: 1.25rem;
-  position: relative;
+/* Theme toggle: one icon button, three states. Only the icon for the current
+   state is shown. Deliberately conventional — custom widgets (split pill,
+   segmented control, three-stop track) all read as UI dropped into a text nav. */
+.theme-toggle {
   display: inline-flex;
   align-items: center;
-  width: var(--toggle-w);
-  height: var(--toggle-h);
-}
-/* was opacity-0 w-0 h-0 — zero-dimension, so no focus ring could be drawn */
-.toggle-input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
-.toggle-slider {
-  position: absolute;
-  inset: 0;
+  padding: 2px;
+  border: 0;
+  background: none;
+  color: var(--text-2);
   cursor: pointer;
-  border-radius: 18px;
-  background-color: var(--text-2);
-  transition: background-color 0.3s ease;
+  line-height: 1;
 }
-.toggle-slider::before {
-  content: "";
-  position: absolute;
-  bottom: 2px;
-  left: 2px;
-  width: var(--knob);
-  height: var(--knob);
-  border-radius: 50%;
-  background-color: var(--bg);
-  transition: translate 0.3s ease;
-}
-.toggle-input:checked + .toggle-slider { background-color: var(--link); }
-.toggle-input:checked + .toggle-slider::before {
-  translate: calc(var(--toggle-w) - var(--knob) - 4px) 0;
-}
-.toggle-slider:hover { background-color: var(--link); }
-.toggle-input:focus-visible + .toggle-slider {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-}
+.theme-toggle:hover { color: var(--link); }
+.theme-toggle .ic { display: none; width: 1.05rem; height: 1.05rem; }
+.theme-toggle[data-theme-state="system"] .ic-system,
+.theme-toggle[data-theme-state="light"]  .ic-light,
+.theme-toggle[data-theme-state="dark"]   .ic-dark { display: block; }
 
 /* ── 5. SYNTAX (Chroma) ────────────────────────────────────────────────────
    Grouped by role: 66 single-property rules collapsed to 9 colour groups.
@@ -491,7 +469,6 @@ article.post { margin-bottom: var(--space-8); }
     margin-inline: calc(var(--pad) * -1);
     border-radius: 0;
   }
-  .toggle-switch { --toggle-w: 2rem; --toggle-h: 1.125rem; --knob: 0.875rem; }
   .smallcap { font-size: var(--text-md); }
 }
 

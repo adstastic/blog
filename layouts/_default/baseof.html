@@ -23,13 +23,13 @@
     </script>
     <script>
         // Runs before first paint to prevent a flash of the wrong theme.
-        // An explicit choice wins; absent one, follow the OS.
+        // Three stored values: "light", "dark", or absent/"system" = follow OS.
         (function() {
-            const stored = localStorage.getItem('theme');
-            const dark = stored
-                ? stored === 'dark'
-                : matchMedia('(prefers-color-scheme: dark)').matches;
+            var pref = localStorage.getItem('theme') || 'system';
+            var dark = pref === 'dark' ||
+                (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
             if (dark) document.documentElement.classList.add('dark-theme');
+            document.documentElement.dataset.themePref = pref;
         })();
     </script>
 </head>
@@ -39,17 +39,36 @@
     </main>
 
     <script>
-        // The head script already decided the theme; this only syncs the
-        // checkbox to it and records an explicit choice. html.dark-theme is
-        // the single source of truth — body[data-theme] was written here for
-        // years and no CSS ever read it.
+        // Cycles system -> light -> dark. The icon shows the CURRENT state and
+        // the label names the next action, so the control describes itself.
         (function() {
-            const toggle = document.getElementById('dark-mode-toggle');
-            const html = document.documentElement;
-            toggle.checked = html.classList.contains('dark-theme');
-            toggle.addEventListener('change', function() {
-                html.classList.toggle('dark-theme', this.checked);
-                localStorage.setItem('theme', this.checked ? 'dark' : 'light');
+            var btn = document.querySelector('.theme-toggle');
+            if (!btn) return;
+            var html = document.documentElement;
+            var order = ['system', 'light', 'dark'];
+            var next = { system: 'light', light: 'dark', dark: 'system' };
+
+            function apply(pref) {
+                var dark = pref === 'dark' ||
+                    (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+                html.classList.toggle('dark-theme', dark);
+                html.dataset.themePref = pref;
+                btn.dataset.themeState = pref;
+                var name = { system: 'auto', light: 'light', dark: 'dark' };
+                var label = 'Theme: ' + name[pref] + '. Switch to ' + name[next[pref]] + '.';
+                btn.setAttribute('aria-label', label);
+                btn.setAttribute('title', label);
+                if (pref === 'system') localStorage.removeItem('theme');
+                else localStorage.setItem('theme', pref);
+            }
+
+            apply(html.dataset.themePref || 'system');
+            btn.addEventListener('click', function() {
+                apply(next[btn.dataset.themeState] || 'light');
+            });
+            // Follow the OS live while the preference is system.
+            matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+                if ((html.dataset.themePref || 'system') === 'system') apply('system');
             });
         })();
     </script>
