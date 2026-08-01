@@ -12,7 +12,7 @@ import re
 import sys
 import pathlib
 
-CSS = pathlib.Path(__file__).parent / "static/css/main.css"
+CSS = pathlib.Path(__file__).parent / "assets/css/main.css"
 FG = ["text", "text-2", "link", "link-hover"]
 BG = ["bg", "bg-panel"]
 MIN = 4.5

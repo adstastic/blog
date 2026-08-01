@@ -11,7 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+    {{- /* Content-hashed filename. main.css at a stable URL meant a returning
+     visitor could get new HTML with a cached old stylesheet, which renders
+     the new classes unstyled. Hugo fingerprints it, so the URL changes
+     only when the file does. */ -}}
+    {{ $css := resources.Get "css/main.css" | fingerprint "md5" }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MBR26ZPS1G"></script>
     <script>
