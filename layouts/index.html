@@ -19,9 +19,19 @@
   <article class="feed-item">
     <h3 class="feed-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
     {{ if eq .Section "quotes" }}
-      {{/* Quotes render in full: they are short, and the body opens
-           "Quoting <author>:", which identifies the type without a label. */}}
-      {{ .Content }}
+      {{/* Quotes are NOT reliably short: median 175 words, p90 1103, longest
+           10370. Under 200 words render in full, because the body opens
+           "Quoting <author>:" and identifies the type without a label.
+           Above that, show the attribution and the first blockquote only, so
+           the cut lands on a structural boundary rather than mid-sentence. */}}
+      {{ if le .WordCount 200 }}
+        {{ .Content }}
+      {{ else }}
+        {{ with findRE "(?s)<p>.*?</p>" .Content 1 }}{{ index . 0 | safeHTML }}{{ end }}
+        {{ with findRE "(?s)<blockquote>.*?</blockquote>" .Content 1 }}{{ index . 0 | safeHTML }}{{ end }}
+        <p class="feed-more"><a href="{{ .Permalink }}">Continue reading &rarr;</a>
+          <span class="feed-len">{{ .ReadingTime }} min</span></p>
+      {{ end }}
     {{ else }}
       {{/* First paragraph only. .Summary returns the first ~70 words of
            RENDERED html, so it drags in headings and images: the front page
