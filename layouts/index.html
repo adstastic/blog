@@ -36,30 +36,29 @@
       {{ end }}
     {{ end }}
 
-    {{ $ex := "" }}
+    {{ $ex := $first }}
     {{ if eq .Section "quotes" }}
-      {{/* Quotes are NOT reliably short: median 175 words, p90 1103, longest
-           10370. Under 200 words render in full, because the body opens
-           "Quoting <author>:" and identifies the type without a label.
-           Above that, show the attribution and the first blockquote only, so
-           the cut lands on a structural boundary rather than mid-sentence. */}}
-      {{ if le .WordCount 200 }}
-        {{ $ex = printf "%s" .Content }}
-      {{ else }}
-        {{ $ex = $first }}
-        {{ with findRE "(?s)<blockquote>.*?</blockquote>" .Content 1 }}{{ $ex = printf "%s%s" $ex (index . 0) }}{{ end }}
-      {{ end }}
+      {{/* Attribution plus the first blockquote, whatever the length. Quotes
+           are NOT reliably short: median 175 words, p90 1103, longest 10370.
+           Rendering anything under 200 words in full meant a 60-word quote
+           showed three blockquotes while a 1000-word one showed a single
+           blockquote, so brevity was rewarded with more of the feed. The cut
+           lands on a structural boundary either way. */}}
+      {{ with findRE "(?s)<blockquote>.*?</blockquote>" .Content 1 }}{{ $ex = printf "%s%s" $ex (index . 0) }}{{ end }}
     {{ else }}
       {{/* First paragraph only. .Summary returns the first ~70 words of
            RENDERED html, so it drags in headings and images: the front page
            showed "##Why" in the body font and a full slide image. */}}
-      {{ $ex = $first }}
     {{ end }}
 
     {{/* Anchor the link to the last </p>, which for a quote sits inside the
-         closing </blockquote>. An excerpt equal to the whole post has nothing
-         to continue to, so it gets no link. */}}
-    {{ if ne $ex (printf "%s" .Content) }}
+         closing </blockquote>. Compare the plain text rather than the markup:
+         the excerpt is assembled from findRE matches, so it never carries the
+         newlines Hugo puts between blocks, and a raw string comparison called
+         every item truncated. */}}
+    {{ $exText := strings.TrimSpace (replaceRE `\s+` " " (plainify $ex)) }}
+    {{ $allText := strings.TrimSpace (replaceRE `\s+` " " (plainify (printf "%s" .Content))) }}
+    {{ if ne $exText $allText }}
       {{/* Bracketed because an excerpt can end on a prose link, and two
            adjacent underlined runs separated by ". " read as one link. The
            brackets mark it as apparatus rather than part of the sentence. */}}
